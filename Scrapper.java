@@ -92,5 +92,15 @@ public class Scrapper {
         return null;
 
     }
+    
+    // -------------------------------------Meta Data part----------------------------------------------------------
+    
+    // This method is used for getting meta data and url from .....
+    public void getMetaDta(String courtName, String starDate, String endDate) {
+
+        switch (courtName) {
+
+        }
+    }
 
 }
