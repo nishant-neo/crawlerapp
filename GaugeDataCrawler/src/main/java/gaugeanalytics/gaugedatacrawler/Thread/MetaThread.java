@@ -9,7 +9,7 @@ package gaugeanalytics.gaugedatacrawler.Thread;
  *
  * @author Abhay
  */
-public class DataThread implements Runnable{
+public class MetaThread implements Runnable {
 
     @Override
     public void run() {
