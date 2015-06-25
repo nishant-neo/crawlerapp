@@ -10,5 +10,5 @@ package gaugeanalytics.gaugedatacrawler.file;
  * @author Abhay
  */
 public interface File {
-    
+     
 }

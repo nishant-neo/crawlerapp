@@ -12,5 +12,5 @@ package gaugeanalytics.gaugedatacrawler.validator;
  */
 public interface Validator<T> {
 
-    boolean isValid(T field);
+    boolean isValid(T fiel);
 }
