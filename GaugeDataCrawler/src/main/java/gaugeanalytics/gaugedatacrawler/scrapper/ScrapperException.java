@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gaugeanalytics.gaugedatacrawler.file;
+package gaugeanalytics.gaugedatacrawler.scrapper;
 
 /**
  *
- * @author Abhay
+ * @author nitin
  */
-public class OriginalFile implements File {
+public class ScrapperException extends Exception {
     
 }
