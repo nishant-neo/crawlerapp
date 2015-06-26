@@ -11,10 +11,10 @@ package com.gauge.crawler.file;
  */
 public class TextFile implements File {
 
-	@Override
-	public void extract() {
+    @Override
+    public void extract() {
 		// TODO Auto-generated method stub
-		
-	}
-    
+
+    }
+
 }
