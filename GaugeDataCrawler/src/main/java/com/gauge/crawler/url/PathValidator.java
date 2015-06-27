@@ -5,6 +5,8 @@
  */
 package com.gauge.crawler.url;
 
+import com.gauge.crawler.commons.Validator;
+
 /**
  *
  * @author Abhay

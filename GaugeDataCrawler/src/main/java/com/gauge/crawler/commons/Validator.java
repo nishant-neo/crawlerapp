@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.gauge.crawler.url;
+package com.gauge.crawler.commons;
 
 /**
  *
  * @author Abhay
+ * @param <T>
  */
-public class ValidatorException extends Exception {
+public interface Validator<T> {
 
+    boolean isValid(T fiel);
 }

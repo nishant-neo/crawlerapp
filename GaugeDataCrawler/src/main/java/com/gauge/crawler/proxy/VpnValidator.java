@@ -3,19 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.gauge.crawler.vpn;
+package com.gauge.crawler.proxy;
 
-import org.apache.commons.pool.BasePoolableObjectFactory;
+import com.gauge.crawler.commons.Validator;
 
 /**
  *
- * @author Abhay
+ * @author nitin
  */
-public class ObjectFactory extends BasePoolableObjectFactory {
+public class VpnValidator implements Validator {
 
     @Override
-    public Object makeObject() throws Exception {
+    public boolean isValid(Object field) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }
