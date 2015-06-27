@@ -3,19 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.gauge.crawler.file.downloader;
-
-import com.gauge.crawler.commons.Validator;
+package com.gauge.crawler.webpage.content.downloader;
 
 /**
  *
- * @author nitin
+ * @author Abhay
  */
-public class PageValidator implements Validator {
+public class HtmlPageDownloader implements Downloader {
 
     @Override
-    public boolean isValid(Object field) {
+    public void download() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
 }

@@ -3,18 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.gauge.crawler.file;
+package com.gauge.crawler.webpage.content.downloader;
 
 /**
  *
  * @author Abhay
  */
-public class MetaFile implements File {
+public interface Downloader {
 
-    @Override
-    public void extract() {
-		// TODO Auto-generated method stub
-
-    }
-
+    public void download();
 }

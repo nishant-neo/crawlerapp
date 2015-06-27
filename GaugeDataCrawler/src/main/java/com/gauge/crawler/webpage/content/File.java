@@ -3,18 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.gauge.crawler.file;
+package com.gauge.crawler.webpage.content;
 
 /**
  *
  * @author Abhay
  */
-public class TextFile implements File {
-
-    @Override
-    public void extract() {
-		// TODO Auto-generated method stub
-
-    }
-
+public interface File {
+     public void extract();
 }
