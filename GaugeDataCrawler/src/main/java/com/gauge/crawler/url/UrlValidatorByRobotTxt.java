@@ -11,7 +11,7 @@ import com.gauge.crawler.commons.Validator;
  *
  * @author Abhay
  */
-public class PathValidator implements Validator {
+public class UrlValidatorByRobotTxt implements Validator {
 
     @Override
     public boolean isValid(Object field) {

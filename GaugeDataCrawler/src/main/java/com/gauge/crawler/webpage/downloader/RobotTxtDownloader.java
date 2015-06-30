@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.gauge.crawler.webpage.content.downloader;
+package com.gauge.crawler.webpage.downloader;
 
 /**
  *
  * @author Abhay
  */
+
+// This calss will responsible for downloading and saving the Robot.Txt file
 public class RobotTxtDownloader implements Downloader {
 
     @Override

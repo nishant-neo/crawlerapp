@@ -3,12 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.gauge.crawler.webpage.content.downloader;
+package com.gauge.crawler.webpage.downloader;
 
 /**
  *
  * @author Abhay
  */
-public class DownloadingException extends Exception {
 
+// This interface has one method called download and it will extended by Downlder class
+public interface Downloader {
+
+    public void download();
 }

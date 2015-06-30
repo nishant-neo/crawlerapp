@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.gauge.crawler.webpage.content;
+package com.gauge.crawler.commons;
 
 /**
  *
- * @author nitin
+ * @author Abhay
  */
 
 // This class will handle all getting and setting path of text file, pdf file, html file 

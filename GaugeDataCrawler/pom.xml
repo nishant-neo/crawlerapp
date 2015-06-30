@@ -1,10 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <outputDirectory>/home/nitin/NetBeansProjects</outputDirectory>
+                    <finalName>Gauge-Data-Crawler</finalName>
+                    <attach>false</attach>s
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.3</version>
+                <configuration>
+                    <show>private</show>
+                    <nohelp>true</nohelp>
+                </configuration>
+            </plugin> 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <altDeploymentRepository>
+                        snapshot-repo::default::file:/home/nitin/NetBeansProjects/GaugeAnalytics
+                    </altDeploymentRepository>
+                </configuration>
+            </plugin>          
+        </plugins>
+    </build>
     <modelVersion>4.0.0</modelVersion>
     <groupId>GaugeAnalytics</groupId>
     <artifactId>GaugeDataCrawler</artifactId>
     <version>Beta</version>
     <packaging>jar</packaging>
+    
     <dependencies>
         <dependency>
             <groupId>commons-pool</groupId>
@@ -28,9 +62,10 @@
             <version>4.11</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.nutch</groupId>
-            <artifactId>nutch</artifactId>
-            <version>2.3</version>
+            <groupId>com.jaunt.code</groupId> 
+            <artifactId>jaunt</artifactId>
+            <version>1.0</version>
+            <type>jar</type>
         </dependency>
     </dependencies>   
     <properties>

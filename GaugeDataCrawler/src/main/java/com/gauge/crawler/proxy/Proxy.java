@@ -9,6 +9,8 @@ package com.gauge.crawler.proxy;
  *
  * @author Abhay
  */
+// This interface has one method setProxy and it will extend by two classes one is SystemLevelProxy and second one is ThreadLevelproxy
 public interface Proxy {
-    
+
+    public void setProxy();
 }

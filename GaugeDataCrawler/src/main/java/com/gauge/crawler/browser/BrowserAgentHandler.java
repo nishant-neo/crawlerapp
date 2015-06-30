@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.gauge.crawler.webpage.content.downloader;
+package com.gauge.crawler.browser;
 
 /**
  *
  * @author Abhay
  */
-public interface Downloader {
-
-    public void download();
+public class BrowserAgentHandler {
+    
 }

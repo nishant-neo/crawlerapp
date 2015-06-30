@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.gauge.crawler.queue;
+package com.gauge.crawler.scheduler;
 
 /**
  *
  * @author Abhay
  */
-public class Queue {
-
-   public static void main(String []args){
-       System.out.println("hiii im working...");
-   }
+public class Scheduler {
+    
 }

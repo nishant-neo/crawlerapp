@@ -3,16 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.gauge.crawler.webpage.metadata;
+package com.gauge.crawler.webpage.downloader;
+
+import com.gauge.crawler.commons.Validator;
 
 /**
  *
  * @author Abhay
  */
-public class DataThread implements Runnable{
+
+// This class will responsible for validating page before downloading
+public class PageValidator implements Validator {
 
     @Override
-    public void run() {
+    public boolean isValid(Object field) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

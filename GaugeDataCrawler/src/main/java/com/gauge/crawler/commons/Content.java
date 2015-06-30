@@ -9,6 +9,10 @@ package com.gauge.crawler.commons;
  *
  * @author Abhay
  */
-public class ValidatorException extends Exception {
+// This is an interface that has one method extract, and this interface will implement by DataConentFile class and MetaContentFile class
+public interface Content {
 
+    public void extractData();
+
+    public void saveData();
 }

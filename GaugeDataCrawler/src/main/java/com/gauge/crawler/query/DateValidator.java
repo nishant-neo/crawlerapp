@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.gauge.crawler.url;
+package com.gauge.crawler.query;
 
 import com.gauge.crawler.commons.Validator;
 
@@ -11,10 +11,12 @@ import com.gauge.crawler.commons.Validator;
  *
  * @author Abhay
  */
-public class RobotTxtValidator implements Validator {
+
+// This class will used to validate date fromat of uery
+public class DateValidator implements Validator {
 
     @Override
-    public boolean isValid(Object field) {
+    public boolean isValid(Object fiel) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
