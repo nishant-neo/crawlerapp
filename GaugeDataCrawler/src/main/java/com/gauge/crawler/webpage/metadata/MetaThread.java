@@ -5,6 +5,7 @@
  */
 package com.gauge.crawler.webpage.metadata;
 
+import com.gauge.crawler.browser.BrowserAgent;
 import org.apache.commons.pool.impl.SoftReferenceObjectPool;
 
 /**
@@ -14,10 +15,10 @@ import org.apache.commons.pool.impl.SoftReferenceObjectPool;
 // This thread class will responsible for downloading meta-data and meta-datahtml page
 public class MetaThread implements Runnable {
 
-    public SoftReferenceObjectPool pool;
+    BrowserAgent agent;
 
-    public MetaThread(SoftReferenceObjectPool pool) {
-        this.pool = pool;
+    public MetaThread(SoftReferenceObjectPool pool) throws Exception {
+        agent = (BrowserAgent) pool.borrowObject();
     }
 
     @Override

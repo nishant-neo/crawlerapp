@@ -56,16 +56,15 @@
             <version>4.4</version>
         </dependency>
         <dependency>
+            <groupId>com.jaunt.code</groupId>
+            <artifactId>jaunt</artifactId>
+            <version>jaunt1.0.0.1.jar</version>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope> 
             <version>4.11</version>
-        </dependency>
-        <dependency>
-            <groupId>com.jaunt.code</groupId> 
-            <artifactId>jaunt</artifactId>
-            <version>1.0</version>
-            <type>jar</type>
         </dependency>
     </dependencies>   
     <properties>

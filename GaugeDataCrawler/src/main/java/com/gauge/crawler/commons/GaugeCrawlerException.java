@@ -10,6 +10,6 @@ package com.gauge.crawler.commons;
  * @author Abhay
  */
 // This Exception class will handle exception in crawler
-public class GaugeCrawlwerException extends Exception {
+public class GaugeCrawlerException extends Exception {
 
 }

@@ -5,9 +5,8 @@
  */
 package com.gauge.crawler.webpage.content;
 
-
+import com.gauge.crawler.browser.BrowserAgent;
 import com.jaunt.ResponseException;
-import com.jaunt.UserAgent;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,17 +19,24 @@ import org.apache.commons.pool.impl.SoftReferenceObjectPool;
 // This thread class will responsible for downloading text , pdf and data-html page
 public class DataThread implements Runnable {
 
-    UserAgent agent;
+    BrowserAgent agent;
 
     public DataThread(SoftReferenceObjectPool pool) throws Exception {
-        agent = (UserAgent) pool.borrowObject();
+        agent = (BrowserAgent) pool.borrowObject();
     }
 
     @Override
     public void run() {
-       System.out.println("Data Thread created...");
+        System.out.println("Data Thread created...");
         try {
-            agent.visit("http://www.tutorialspoint.com/design_pattern/factory_pattern.htm");
+            try{
+                agent.visit("http://indiankanoon.org/");
+                System.out.println("url opened with vpn");
+            }catch(Exception e){
+                System.out.println("Url opened witout vpn");
+                agent.visit("http://stackoverflow.com/");
+            }
+            System.out.println(agent.doc.innerHTML());
         } catch (ResponseException ex) {
             Logger.getLogger(DataThread.class.getName()).log(Level.SEVERE, null, ex);
         }

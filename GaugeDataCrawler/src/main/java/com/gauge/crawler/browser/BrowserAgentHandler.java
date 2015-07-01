@@ -9,6 +9,8 @@ package com.gauge.crawler.browser;
  *
  * @author Abhay
  */
+
+// This class would responsible for handeling BrowserAgent
 public class BrowserAgentHandler {
     
 }

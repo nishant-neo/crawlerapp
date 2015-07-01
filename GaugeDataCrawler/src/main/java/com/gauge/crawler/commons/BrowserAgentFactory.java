@@ -5,7 +5,7 @@
  */
 package com.gauge.crawler.commons;
 
-import com.gauge.crawler.browser.BrowserAgent;
+import com.gauge.crawler.proxy.ProxyHandeler;
 import org.apache.commons.pool.BasePoolableObjectFactory;
 
 /**
@@ -15,10 +15,10 @@ import org.apache.commons.pool.BasePoolableObjectFactory;
 // This class is respoonsible for passing Object to Object Pool and it is extending BasePoolableObjectFactory class from Apache commons pool api
 public class BrowserAgentFactory extends BasePoolableObjectFactory {
 
-    public BrowserAgent browserAgent;
+    private final ProxyHandeler proxyHandeler;
 
     public BrowserAgentFactory() {
-        browserAgent = new BrowserAgent();
+        proxyHandeler = new ProxyHandeler();
     }
 
     /**
@@ -28,7 +28,7 @@ public class BrowserAgentFactory extends BasePoolableObjectFactory {
     @Override
     // This method will make the object that would pass to pool
     public Object makeObject() throws Exception {
-        return browserAgent.getBrowserAgent();
+        return proxyHandeler.getBrowserAgent();
     }
 
 }

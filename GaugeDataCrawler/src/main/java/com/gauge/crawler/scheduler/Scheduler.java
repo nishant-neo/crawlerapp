@@ -9,6 +9,7 @@ package com.gauge.crawler.scheduler;
  *
  * @author Abhay
  */
+//This class would be responsible to sheduling the downloading process
 public class Scheduler {
-    
+
 }

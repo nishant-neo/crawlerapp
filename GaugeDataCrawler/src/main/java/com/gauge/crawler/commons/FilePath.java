@@ -13,7 +13,7 @@ package com.gauge.crawler.commons;
 // This class will handle all getting and setting path of text file, pdf file, html file 
 public class FilePath {
 
-    // This method will used for set tha base path
+    // This method will used to set the base path
     public void setBasePath(String basePath) {
 
     }
