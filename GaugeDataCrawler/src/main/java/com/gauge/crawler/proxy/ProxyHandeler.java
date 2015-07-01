@@ -35,32 +35,32 @@ public class ProxyHandeler {
         if (this.proxyType == 1) {
             threadLevelProxy.setProxy();
             this.browserAgent = threadLevelProxy.browserAgent;
-        } else {
+        } else if (this.proxyType == 2) {
             systemLevelProxy.setProxy();
-            this.browserAgent = browserAgent.getBrowserAgent();
+            //this.browserAgent = browserAgent.getBrowserAgent();
         }
     }
 
     // This method will used for get Browser Agent with Proxy
     public BrowserAgent getBrowserAgent() {
         this.setProxyType();
-        return this.browserAgent;
-
+        if (this.proxyType == 2 || this.proxyType == 3) {// This will be called when user want SystemLevel Proxy or No Proxy
+            return new BrowserAgent();
+        } else {
+            return this.browserAgent;
+        }
     }
 
     private void getProxyType() {// This method will use to set proxy type
         int tmp = 0;
-        System.out.println("Enter 1 for Thread Level Proxy and 2 for System Level Proxy");
-        do {
+        System.out.println("Enter 1 for Thread Level Proxy, 2 for System Level Proxy and 3 for No proxy");
+        do {                     // This do while loop will use to take correct input from user
             if (tmp > 0) {
                 System.out.println("Enter the correct option, Try again");
                 tmp = 0;
             }
             this.proxyType = sc.nextInt();
             tmp++;
-        } while (this.proxyType != 1 && this.proxyType != 2);
-        if (this.proxyType == 2) {
-            this.browserAgent = new BrowserAgent();
-        }
+        } while (this.proxyType != 1 && this.proxyType != 2 && this.proxyType != 3);
     }
 }
