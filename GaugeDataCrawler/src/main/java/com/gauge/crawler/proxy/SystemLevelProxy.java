@@ -6,6 +6,9 @@
 package com.gauge.crawler.proxy;
 
 import com.gauge.crawler.browser.BrowserAgent;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -14,7 +17,6 @@ import com.gauge.crawler.browser.BrowserAgent;
 // This class will handle SystemLevel proxy if user want to use only one Vpn for all thread then instance will called of this class
 public class SystemLevelProxy implements Proxy {
 
-    BrowserAgent browserAgent;
     private final Vpn vpn;
 
     public SystemLevelProxy() {
@@ -22,10 +24,15 @@ public class SystemLevelProxy implements Proxy {
     }
 
     @Override
-    public void setProxy() {// This method would used to setSystemLevel Proxy
+    public void setProxy() {
+        try { // This method would used to setSystemLevel Proxy
 
-        System.setProperty("http.proxyHost", "host");
-        System.setProperty("http.proxyPort", "port_number");
+            String[] str = vpn.getVpn().split("[: ]");
+            System.setProperty("http.proxyHost", str[0].trim());
+            System.setProperty("http.proxyPort", str[1].trim());
+        } catch (IOException ex) {
+            Logger.getLogger(SystemLevelProxy.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

@@ -31,9 +31,9 @@ public class DataThread implements Runnable {
         try {
             try{
                 agent.visit("http://indiankanoon.org/");
-                System.out.println("url opened with vpn");
+                System.out.println("IndianKanoon opened with vpn");
             }catch(Exception e){
-                System.out.println("Url opened witout vpn");
+                System.out.println("Url opened without vpn");
                 agent.visit("http://stackoverflow.com/");
             }
             System.out.println(agent.doc.innerHTML());
