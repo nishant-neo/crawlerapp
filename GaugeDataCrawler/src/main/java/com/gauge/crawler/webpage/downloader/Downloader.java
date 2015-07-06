@@ -5,6 +5,7 @@
  */
 package com.gauge.crawler.webpage.downloader;
 
+
 /**
  *
  * @author Abhay
@@ -13,5 +14,5 @@ package com.gauge.crawler.webpage.downloader;
 // This interface has one method called download and it will extended by Downlder class
 public interface Downloader {
 
-    public void download();
+    public void download(Object url);
 }

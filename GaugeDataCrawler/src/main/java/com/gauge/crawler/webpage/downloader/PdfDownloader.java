@@ -15,7 +15,7 @@ public class PdfDownloader implements Downloader {
 
     @Override
     //This method will download pdf file
-    public void download() {
+    public void download(Object url) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
