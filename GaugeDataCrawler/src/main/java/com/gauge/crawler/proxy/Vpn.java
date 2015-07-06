@@ -6,14 +6,11 @@
 package com.gauge.crawler.proxy;
 
 import au.com.bytecode.opencsv.CSVReader;
-import java.awt.Desktop;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -43,7 +40,7 @@ public class Vpn {
             System.out.println("Vpn List is Epmty, Plz add some more vpn and press any number to resume program");
             String stemp = sc.next();
         }
-        String vpnCsv = "SFile/Vpn.csv" ;
+        String vpnCsv = "SFile/Vpn.csv";
         CSVReader br = new CSVReader(new FileReader(vpnCsv));
 
         String[] url;
