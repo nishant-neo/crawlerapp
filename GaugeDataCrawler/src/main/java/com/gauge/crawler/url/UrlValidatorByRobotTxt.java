@@ -15,36 +15,47 @@ public class UrlValidatorByRobotTxt implements Validator {
 
     @Override
     public boolean isValid(Object field) {
-        
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        String robots = (String) field;
-        String link = "http://www.flipkart.com/reviews/";
-        //Some method to access the file that contains the robots.txt for a particular domain. 
+         //throw new UnsupportedOperationException("Not supported yet."); 
+        //To change body of generated methods, choose Tools | Templates.
+        String robots = field.toString();
+        String link = "http://www.flipkart.com/dynamic/";
+         //Some method to access the file that contains the robots.txt for a particular domain. 
         //String robots = "";// Convert the contents to String data  type
-        int i, j, sent = 0, us, next;
+        int firstIndex, lastIndex, searched = 0, nextUseragent, flag = 1;
         //Extracting all the disallowed links and comparing to the url provided
-        while (robots.indexOf("User-agent: *", sent) != -1) {
-            j = robots.indexOf("User-agent: *", sent);
-            next = robots.indexOf("User-agent: *", j + 12);
-            if (next == -1) {
-                next = robots.length() - 1;
+        while (robots.indexOf("User-agent: *", searched) != -1) {
+
+            lastIndex = robots.indexOf("User-agent: *", searched);
+            nextUseragent = robots.indexOf("User-agent: *", lastIndex + 12);
+            if (nextUseragent == -1) {
+                nextUseragent = robots.length() - 1;
             }
-            while (robots.indexOf("Disallow: ", j) != -1 && robots.indexOf("Disallow: ", j) < next) {
-                i = robots.indexOf("Disallow: ", j) + 9;
-                j = robots.indexOf("\n", i);
-                if (j == -1) {
-                    j = robots.length() - 1;
+            while (robots.indexOf("Disallow: ", lastIndex) != -1 && robots.indexOf("Disallow: ", lastIndex) < nextUseragent) {
+
+                firstIndex = robots.indexOf("Disallow: ", lastIndex) + 9;
+                lastIndex = robots.indexOf("\n", firstIndex);
+                if (lastIndex == -1) {
+                    lastIndex = robots.length() - 1;
                 }
-                String sub = robots.substring(i, j);
+                String sub = robots.substring(firstIndex, lastIndex);
                 //System.out.println(sub);
-                if (!link.contains(sub)) {
-                    return false;
+                if (link.contains(sub)) {
+                    flag = 0;
+                    break;
                 }
-                sent = j;
+                searched = lastIndex;
             }
         }
-        return true;
+        if (!robots.contains("User-agent: *\n" + "Crawl-delay:") && flag == 0) {
+            return false;
+        } else if (robots.contains("User-agent: *\n" + "Crawl-delay:")) {
+            int temp = robots.indexOf("User-agent: *\n" + "Crawl-delay:");
+            int delayTime = Integer.parseInt(robots.substring(temp + 27, robots.indexOf("\n", temp + 27)));
+            //This delayTime can be sent to some other method to impose the delay
+            return true;//with an extra comdition that there ought to be delay time
+        }
 
+        return true;
     }
 
 }
