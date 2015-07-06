@@ -40,7 +40,7 @@ public class Vpn {
             System.out.println("Vpn List is Epmty, Plz add some more vpn and press any number to resume program");
             String stemp = sc.next();
         }
-        String vpnCsv = "SFile/Vpn.csv";
+        String vpnCsv = "Program-File/Vpn.csv";
         CSVReader br = new CSVReader(new FileReader(vpnCsv));
 
         String[] url;
