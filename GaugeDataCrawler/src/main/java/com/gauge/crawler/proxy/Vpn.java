@@ -6,6 +6,8 @@
 package com.gauge.crawler.proxy;
 
 import au.com.bytecode.opencsv.CSVReader;
+import java.awt.Desktop;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -19,7 +21,7 @@ import java.util.Scanner;
  */
 //This class would responsible for adding , removing, updating vpn server list
 public class Vpn {
-
+    
     Scanner sc = new Scanner(System.in);
     LinkedList<String> vpnList; // This variable is used for saving new vpn list
     LinkedList<String> usedVpnList; //This variable is used for saving used vpn server
@@ -37,15 +39,16 @@ public class Vpn {
     public ArrayList<String> getVpnList() throws FileNotFoundException, IOException {
         ArrayList<String> al = new ArrayList();
         if (this.listUpdateCounter > 0) {
-            System.out.println("Vpn List is Epmty, Plz add some more vpn and press any number to resume program");
+            System.out.println("Plz add some more vpn and press any number to resume program");
+            Desktop.getDesktop().open(new File("Program-File/vpn.csv"));
             String stemp = sc.next();
         }
         String vpnCsv = "Program-File/vpn.csv";
         CSVReader br = new CSVReader(new FileReader(vpnCsv));
-
+        
         String[] url;
         try {
-
+            
             while ((url = br.readNext()) != null) {
                 String temp = url[0].trim();
                 if (vpnValidator.isValid(temp)) {// This block is used for validating vpn from csv if not valid then not added in our list
@@ -63,7 +66,7 @@ public class Vpn {
                 System.out.print(e.getMessage());
             }
         }
-
+        
         return al;
     }
 
@@ -85,7 +88,7 @@ public class Vpn {
             System.out.println(" Something Wrong ");
         }
     }
-
+    
     public String getVpn() throws IOException {// This method would return vpn from main list
         String tmp;
         if (this.vpnList.size() == 0) {
@@ -94,8 +97,8 @@ public class Vpn {
         tmp = this.vpnList.get(0);
         this.usedVpnList.add(tmp);
         this.vpnList.remove(tmp);
-
+        
         return tmp;
     }
-
+    
 }
