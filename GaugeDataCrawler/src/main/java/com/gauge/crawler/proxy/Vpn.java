@@ -6,11 +6,14 @@
 package com.gauge.crawler.proxy;
 
 import au.com.bytecode.opencsv.CSVReader;
+import java.awt.Desktop;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -37,15 +40,15 @@ public class Vpn {
     public ArrayList<String> getVpnList() throws FileNotFoundException, IOException {
         ArrayList<String> al = new ArrayList();
         if (this.listUpdateCounter > 0) {
-            System.out.println("Vpn list is empty, plz add more vpn, Enter the path of csv");
-        } else {
-            this.listUpdateCounter++;
-            System.out.println("Enter the path of csv , and vpn format should be like this - 37.187.61.127:8080 ");
+            System.out.println("Vpn List is Epmty, Plz add some more vpn and press any number to resume program");
+            String stemp = sc.next();
         }
-        String vpnCsv = sc.next();
+        String vpnCsv = "SFile/Vpn.csv" ;
         CSVReader br = new CSVReader(new FileReader(vpnCsv));
+
         String[] url;
         try {
+
             while ((url = br.readNext()) != null) {
                 String temp = url[0].trim();
                 if (vpnValidator.isValid(temp)) {// This block is used for validating vpn from csv if not valid then not added in our list
@@ -86,7 +89,7 @@ public class Vpn {
         }
     }
 
-    public String getVpn() throws IOException {// This metyhod would return vpn from main list
+    public String getVpn() throws IOException {// This method would return vpn from main list
         String tmp;
         if (this.vpnList.size() == 0) {
             this.addVpn();
