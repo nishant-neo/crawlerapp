@@ -31,7 +31,7 @@ public class VpnIT {
     @AfterClass
     public static void tearDownClass() {
         instance = null;
-        System.out.println("Recourses Closed ");
+        System.out.println("Resources Closed ");
     }
 
     /**

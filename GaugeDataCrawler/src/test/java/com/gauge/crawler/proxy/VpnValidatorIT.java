@@ -40,7 +40,7 @@ public class VpnValidatorIT {
     public static void tearDownClass() {
         vpnPassList = null;
         vpnFailList = null;
-        System.out.println("Recourses Closed ");
+        System.out.println("Resources Closed ");
     }
 
     /**
