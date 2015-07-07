@@ -16,16 +16,22 @@ import static org.junit.Assert.*;
  * @author Abhay
  */
 public class VpnIT {
-    
+
+    static Vpn instance;
+
     public VpnIT() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
+        System.out.println("SetUp for test is completed");
+        instance = new Vpn();
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
+        instance = null;
+        System.out.println("Recourses Closed ");
     }
 
     /**
@@ -33,64 +39,65 @@ public class VpnIT {
      */
     @Test
     public void testGetVpnList() throws Exception {
-        System.out.println("getVpnList");
-        Vpn instance = new Vpn();
-        ArrayList<String> expResult = null;
-        ArrayList<String> result = instance.getVpnList();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("Running test of getVpnList");
+        try {
+            ArrayList<String> myReturnedObject = instance.getVpnList();
+
+            assertNotNull(myReturnedObject); //check if the object is != null
+
+            assertTrue(myReturnedObject instanceof ArrayList); //checks if the returned object is of class ArrayList
+
+        } catch (Exception e) {
+            // let the test fail, if your function throws an Exception.
+            fail("Test of getVpnList is failed");
+        }
     }
 
     /**
      * Test of addVpn method, of class Vpn.
+     *
+     * @throws java.lang.Exception
      */
     @Test
     public void testAddVpn() throws Exception {
-        System.out.println("addVpn");
-        Vpn instance = new Vpn();
-        instance.addVpn();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("Running test of addVpn");
+
+        instance.addVpn();// This method only adding vpn to vpnList
+        assertNotNull(instance.vpnList.size()); // We have to check this list is not null
+
     }
 
     /**
      * Test of updateVpn method, of class Vpn.
+     *
+     * @throws java.lang.Exception
      */
     @Test
     public void testUpdateVpn() throws Exception {
-        System.out.println("updateVpn");
-        Vpn instance = new Vpn();
-        instance.updateVpn();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of removeVpn method, of class Vpn.
-     */
-    @Test
-    public void testRemoveVpn() {
-        System.out.println("removeVpn");
-        String vpn = "";
-        Vpn instance = new Vpn();
-        instance.removeVpn(vpn);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("Running test of updateVpn");
+        instance.addVpn();// This method only updating vpn to vpnList
+        assertNotNull(instance.vpnList.size()); // We have to check this list is not null
     }
 
     /**
      * Test of getVpn method, of class Vpn.
+     *
+     * @throws java.lang.Exception
      */
     @Test
     public void testGetVpn() throws Exception {
-        System.out.println("getVpn");
-        Vpn instance = new Vpn();
-        String expResult = "";
-        String result = instance.getVpn();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("Running test of getVpn");
+        try {
+            String myReturnedObject = instance.getVpn();
+
+            assertNotNull(myReturnedObject); //check if the object is != null
+
+            assertTrue(myReturnedObject instanceof String); //checks if the returned object is of class String
+
+        } catch (Exception e) {
+            // let the test fail, if your function throws an Exception.
+            fail("Test of getVpn is failed");
+        }
     }
-    
+
 }
