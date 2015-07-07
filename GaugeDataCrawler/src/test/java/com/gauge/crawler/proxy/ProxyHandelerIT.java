@@ -16,28 +16,23 @@ import static org.junit.Assert.*;
  * @author Abhay
  */
 public class ProxyHandelerIT {
-    
+
+    private static ProxyHandeler instance;
+
     public ProxyHandelerIT() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
+        instance = new ProxyHandeler();
     }
 
-    /**
-     * Test of setProxyType method, of class ProxyHandeler.
-     */
-    @Test
-    public void testSetProxyType() {
-        System.out.println("setProxyType");
-        ProxyHandeler instance = new ProxyHandeler();
-        instance.setProxyType();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    @BeforeClass
+    public static void setUpClass() {
+
+        System.out.println("SetUp completed ");
+    }
+
+    @AfterClass
+    public static void tearDownClass() {
+        instance = null;
+        System.out.println("Resources Closed ");
     }
 
     /**
@@ -45,13 +40,18 @@ public class ProxyHandelerIT {
      */
     @Test
     public void testGetBrowserAgent() {
-        System.out.println("getBrowserAgent");
-        ProxyHandeler instance = new ProxyHandeler();
-        BrowserAgent expResult = null;
-        BrowserAgent result = instance.getBrowserAgent();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("Test method getBrowserAgent is running");
+        try {
+            BrowserAgent myReturnedObject = instance.getBrowserAgent();
+
+            assertNotNull(myReturnedObject); //check if the object is != null
+
+            assertTrue(myReturnedObject instanceof BrowserAgent); //checks if the returned object is of class String
+
+        } catch (Exception e) {
+            // let the test fail, if your function throws an Exception.
+            fail("Test of getVpn is failed");
+        }
     }
-    
+
 }
