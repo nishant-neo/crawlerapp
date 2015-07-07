@@ -16,14 +16,14 @@ import static org.junit.Assert.*;
  * @author Abhay
  */
 public class ProxyHandelerIT {
-
+    
     public ProxyHandelerIT() {
     }
-
+    
     @BeforeClass
     public static void setUpClass() {
     }
-
+    
     @AfterClass
     public static void tearDownClass() {
     }
@@ -36,9 +36,8 @@ public class ProxyHandelerIT {
         System.out.println("setProxyType");
         ProxyHandeler instance = new ProxyHandeler();
         instance.setProxyType();
-     // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
     /**
@@ -48,12 +47,11 @@ public class ProxyHandelerIT {
     public void testGetBrowserAgent() {
         System.out.println("getBrowserAgent");
         ProxyHandeler instance = new ProxyHandeler();
-        BrowserAgent expResult = instance.getBrowserAgent();
+        BrowserAgent expResult = null;
         BrowserAgent result = instance.getBrowserAgent();
         assertEquals(expResult, result);
-        System.out.println("Test CAse excuted");
         // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+        fail("The test case is a prototype.");
     }
-
+    
 }
