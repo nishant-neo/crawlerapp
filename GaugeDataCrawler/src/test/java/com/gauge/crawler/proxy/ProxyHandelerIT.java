@@ -50,7 +50,7 @@ public class ProxyHandelerIT {
 
         } catch (Exception e) {
             // let the test fail, if your function throws an Exception.
-            fail("Test of getVpn is failed");
+            fail("Test of getVpn is failed"); 
         }
     }
 
