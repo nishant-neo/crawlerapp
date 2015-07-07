@@ -59,8 +59,11 @@ public class ProxyHandeler {
                 System.out.println("Enter the correct option, Try again");
                 tmp = 0;
             }
-            this.proxyType = sc.nextInt();
+            // proxyType = sc.nextInt(); for testing , we have commented
+            this.proxyType = 2;
+
             tmp++;
         } while (this.proxyType != 1 && this.proxyType != 2 && this.proxyType != 3);
+
     }
 }
