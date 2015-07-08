@@ -6,6 +6,7 @@
 package com.gauge.crawler.webpage.content;
 
 import com.gauge.crawler.browser.BrowserAgent;
+import com.gauge.crawler.commons.FilePath;
 import com.jaunt.ResponseException;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -20,9 +21,11 @@ import org.apache.commons.pool.impl.SoftReferenceObjectPool;
 public class DataThread implements Runnable {
 
     BrowserAgent agent;
+    FilePath filePath ;
 
     public DataThread(SoftReferenceObjectPool pool) throws Exception {
         agent = (BrowserAgent) pool.borrowObject();
+        filePath = new FilePath();
     }
 
     @Override
@@ -41,7 +44,8 @@ public class DataThread implements Runnable {
             Logger.getLogger(DataThread.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            agent.doc.saveAs("test.html");
+            String finalPath = filePath.getHtmpPagePath() + "/test.html";
+            agent.doc.saveAs(finalPath);
         } catch (IOException ex) {
             Logger.getLogger(DataThread.class.getName()).log(Level.SEVERE, null, ex);
         }
