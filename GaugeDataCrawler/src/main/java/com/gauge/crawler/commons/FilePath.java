@@ -9,7 +9,6 @@ package com.gauge.crawler.commons;
  *
  * @author Abhay
  */
-
 // This class will handle all getting and setting path of text file, pdf file, html file 
 public class FilePath {
 
@@ -32,7 +31,7 @@ public class FilePath {
 
     // This method will used for getting the path of html page 
     public String getHtmpPagePath() {
-        return null;
+        return "/Program-File";
 
     }
 
