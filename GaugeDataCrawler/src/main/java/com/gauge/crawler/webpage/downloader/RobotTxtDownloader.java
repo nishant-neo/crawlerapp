@@ -24,7 +24,7 @@ public class RobotTxtDownloader implements Downloader {
 		File file;
 		String content = inputStreamString;
                 try {
-                        file = new File("C:\\Users\\NISHANT\\Documents\\NetBeansProjects\\gauge-data\\GaugeDataCrawler\\Program-File\\link"+"vfv"+".txt");
+                        file = new File("/Program-File/link"+"vfv"+".txt");
                         fop = new FileOutputStream(file);
                         // if file doesnt exists, then create it
 			if (!file.exists()) {
