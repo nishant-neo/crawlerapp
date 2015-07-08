@@ -26,7 +26,7 @@ public class VpnValidatorIT {
     }
 
     @BeforeClass
-    public static void setUpClass() {
+    public static void setUpClass() throws Exception {
         vpnPassList = new ArrayList();
         vpnFailList = new ArrayList();
         String[] list = {"183.207.229.204:9000", "120.203.148.7:8118", "103.249.91.193:8080", "61.234.249.125:8118", "42.120.81.28:80"};
@@ -37,7 +37,7 @@ public class VpnValidatorIT {
     }
 
     @AfterClass
-    public static void tearDownClass() {
+    public static void tearDownClass() throws Exception {
         vpnPassList = null;
         vpnFailList = null;
         System.out.println("Resources Closed ");

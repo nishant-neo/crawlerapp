@@ -23,13 +23,13 @@ public class VpnIT {
     }
 
     @BeforeClass
-    public static void setUpClass() {
+    public static void setUpClass() throws Exception {
         System.out.println("SetUp for test is completed");
         instance = new Vpn();
     }
 
     @AfterClass
-    public static void tearDownClass() {
+    public static void tearDownClass() throws Exception {
         instance = null;
         System.out.println("Resources Closed ");
     }

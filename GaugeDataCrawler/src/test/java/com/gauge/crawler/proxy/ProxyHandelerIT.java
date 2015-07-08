@@ -24,22 +24,23 @@ public class ProxyHandelerIT {
     }
 
     @BeforeClass
-    public static void setUpClass() {
+    public static void setUpClass() throws Exception {
 
         System.out.println("SetUp completed ");
     }
 
     @AfterClass
-    public static void tearDownClass() {
+    public static void tearDownClass() throws Exception {
         instance = null;
         System.out.println("Resources Closed ");
     }
 
     /**
      * Test of getBrowserAgent method, of class ProxyHandeler.
+     * @throws java.lang.Exception
      */
     @Test
-    public void testGetBrowserAgent() {
+    public void testGetBrowserAgent() throws Exception {
         System.out.println("Test method getBrowserAgent is running");
         try {
             BrowserAgent myReturnedObject = instance.getBrowserAgent();
