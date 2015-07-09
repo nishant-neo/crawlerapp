@@ -13,5 +13,5 @@ package com.gauge.crawler.commons;
 //This VAlidator interface has one method called isValid ,and all validator class will extend this interface
 public interface Validator<T> {
 
-    boolean isValid(T fiel);
+    boolean isValid(T field);
 }
