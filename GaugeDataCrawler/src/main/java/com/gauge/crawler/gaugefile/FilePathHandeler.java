@@ -16,7 +16,7 @@ public class FilePathHandeler {
 
     public FilePathHandeler() {
         filePath = new FilePath();
-        filePathValidator = new FilePathValidator();
+        filePathValidator = new FilePathValidator(); 
     }
 
     // This method will used to set the base path

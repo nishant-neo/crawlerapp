@@ -14,32 +14,39 @@ public class FilePath {
 
     protected String basePath;
 
+    protected FilePath() {
+        this.basePath = null;
+
+    }
+
 //    // This method will used to set the base path
 //    public void setBasePath(String basePath) {
 //        this.basePath = basePath;
 //    }
     // This method is used for generating TextPath
-    public String TextPath() {
-        return null;
-//        String path = this.basePath + "/" + year;
-//        return path;
-
+    protected String TextPath(String urlAndYear) {
+        String[] str = urlAndYear.split("[: ]");
+        String finalPath = this.basePath + "/textFile/" + this.courtName(str[0]) + "/" + str[1];
+        return finalPath;
     }
 
     // This method is used for generating pdfPath
-    public String PdfPath() {
-        return null;
-//        String path = this.basePath + "/" + year;
-//        return path;
-
+    protected String PdfPath(String urlAndYear) {
+        String[] str = urlAndYear.split("[: ]");
+        String finalPath = this.basePath + "/pdfFile/" + this.courtName(str[0]) + "/" + str[1];
+        return finalPath;
     }
 
     // This method is used for generating htmlPath
-    public String HtmpPagePath() {
-        return null;
-//        String path = this.basePath + "/" + year;
-//        return path;
+    protected String HtmpPagePath(String urlAndYear) {
+        String[] str = urlAndYear.split("[: ]");
+        String finalPath = this.basePath + "/htmlOriginalPage/" + this.courtName(str[0]) + "/" + str[1];
+        return finalPath;
+    }
 
+    //This method would generate the name of court
+    protected String courtName(String url) {
+        return null;
     }
 
 }
