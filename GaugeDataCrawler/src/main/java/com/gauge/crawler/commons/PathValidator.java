@@ -5,7 +5,6 @@
  */
 package com.gauge.crawler.commons;
 
-import com.gauge.crawler.commons.Validator;
 import java.io.File;
 
 /**
