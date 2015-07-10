@@ -5,6 +5,14 @@
  */
 package com.gauge.crawler.webpage.downloader;
 
+import com.gauge.crawler.browser.BrowserAgent;
+import static com.gauge.crawler.commons.MainClass.pool;
+import com.gauge.crawler.commons.FilePath;
+import com.gauge.crawler.commons.PathValidator;
+import com.jaunt.*;
+import java.math.BigInteger;
+import java.security.SecureRandom;
+
 /**
  *
  * @author Abhay
@@ -12,12 +20,49 @@ package com.gauge.crawler.webpage.downloader;
 // This Class will Responsible for downloading the original html page and save to File System
 public class HtmlPageDownloader implements Downloader {
 
-    String url;
+    BrowserAgent agent;
+    FilePath filepath;
+    private final PathValidator pathValidator;
+
+    HtmlPageDownloader() {
+        pathValidator = new PathValidator();
+    }
+
+    public final class SessionIdentifierGenerator {
+
+        private final SecureRandom random = new SecureRandom();
+
+        public String nextSessionId() {
+            return new BigInteger(130, random).toString(32);
+        }
+    }
 
     @Override
     // This method will download original html page
-    public void download(Object url) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void download(Object url) throws Exception {
+        // String  = (String) url; 
+        agent = (BrowserAgent) pool.borrowObject();
+        filepath = new FilePath();
+
+        SessionIdentifierGenerator ob11 = new SessionIdentifierGenerator();
+        String urlS = (String) url;
+        try {
+            String randomvalue = ob11.nextSessionId();
+            agent.visit(urlS);
+
+            String finalpath = filepath.getHtmpPagePath() + "/" +urlS.replaceAll("/", "_") + "_" + randomvalue + ".html";
+            if (!pathValidator.isValid(finalpath)) {
+                System.out.println(finalpath+" path is not valid\nDownloading in error folder");
+                finalpath = "/error_downloads";
+                ///write to error log
+            }
+            agent.doc.saveAs(finalpath);
+        } catch (JauntException e) {
+            System.err.println(e);
+
+        }
+
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
