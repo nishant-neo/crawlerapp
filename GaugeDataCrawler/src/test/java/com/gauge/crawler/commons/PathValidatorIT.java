@@ -5,6 +5,7 @@
  */
 package com.gauge.crawler.commons;
 
+import com.gauge.crawler.gaugefile.FilePathValidator;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -16,14 +17,14 @@ import static org.junit.Assert.*;
  */
 public class PathValidatorIT {
 
-    static PathValidator instance;
+    static FilePathValidator instance;
 
     public PathValidatorIT() {
     }
 
     @BeforeClass
     public static void setUpClass() {
-        instance = new PathValidator();
+        instance = new FilePathValidator();
         System.out.println("SetUp completed ");
     }
 
