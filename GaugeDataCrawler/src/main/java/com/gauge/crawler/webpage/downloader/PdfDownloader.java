@@ -5,6 +5,13 @@
  */
 package com.gauge.crawler.webpage.downloader;
 
+import com.gauge.crawler.browser.BrowserAgent;
+import com.gauge.crawler.commons.FilePath;
+import static com.gauge.crawler.commons.MainClass.pool;
+import com.gauge.crawler.commons.PathValidator;
+import com.jaunt.JauntException;
+import java.io.File;
+
 /**
  *
  * @author Abhay
@@ -13,10 +20,39 @@ package com.gauge.crawler.webpage.downloader;
 // THis calss will responsible for downloading and saving the pdf file
 public class PdfDownloader implements Downloader {
 
+    BrowserAgent agent;
+    String url;
+    FilePath filepath;
+    private final PathValidator pathValidator;
+
+    PdfDownloader() {
+        pathValidator = new PathValidator();
+    }
+    
+    
     @Override
     //This method will download pdf file
-    public void download(Object url) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void download(Object url) throws Exception {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String urlS = (String) url; 
+        agent = (BrowserAgent) pool.borrowObject();
+        filepath = new FilePath(); 
+        
+        try{
+            String path1 = filepath.getPdfPath()+"/"+"test1.pdf";
+            
+            if (!pathValidator.isValid(path1)) {
+                System.out.println(path1+" path is not valid\nDownloading in error folder");
+                path1 = "/error_downloads";
+                ///write to error log
+            }
+            File path2 = new File(path1);
+            agent.download(urlS,path2);
+            
+        }
+        catch (JauntException e){
+            System.err.println(e);
+        }
     }
 
 }
