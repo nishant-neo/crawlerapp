@@ -16,7 +16,6 @@ import java.io.File;
  *
  * @author Abhay
  */
-
 // THis calss will responsible for downloading and saving the pdf file
 public class PdfDownloader implements Downloader {
 
@@ -28,29 +27,27 @@ public class PdfDownloader implements Downloader {
     PdfDownloader() {
         pathValidator = new PathValidator();
     }
-    
-    
+
     @Override
     //This method will download pdf file
     public void download(Object url) throws Exception {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        String urlS = (String) url; 
+        String urlS = (String) url;
         agent = (BrowserAgent) pool.borrowObject();
-        filepath = new FilePath(); 
-        
-        try{
-            String path1 = filepath.getPdfPath()+"/"+"test1.pdf";
-            
+        filepath = new FilePath();
+
+        try {
+            String path1 = filepath.getPdfPath() + "/" + "test1.pdf";
+
             if (!pathValidator.isValid(path1)) {
-                System.out.println(path1+" path is not valid\nDownloading in error folder");
+                System.out.println(path1 + " path is not valid\nDownloading in error folder");
                 path1 = "/error_downloads";
                 ///write to error log
             }
             File path2 = new File(path1);
-            agent.download(urlS,path2);
-            
-        }
-        catch (JauntException e){
+            agent.download(urlS, path2);
+
+        } catch (JauntException e) {
             System.err.println(e);
         }
     }
