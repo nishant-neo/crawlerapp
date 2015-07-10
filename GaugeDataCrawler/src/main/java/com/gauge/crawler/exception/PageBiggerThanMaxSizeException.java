@@ -9,6 +9,6 @@ package com.gauge.crawler.exception;
  *
  * @author Abhay
  */
-public class PageBiggerThanMaxSizeException {
+public class PageBiggerThanMaxSizeException extends Exception {
     
 }
