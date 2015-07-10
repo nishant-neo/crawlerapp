@@ -18,22 +18,27 @@ public class FilePath {
 //    public void setBasePath(String basePath) {
 //        this.basePath = basePath;
 //    }
-
-    // 
+    // This method is used for generating TextPath
     public String TextPath() {
         return null;
+//        String path = this.basePath + "/" + year;
+//        return path;
 
     }
 
-    // 
+    // This method is used for generating pdfPath
     public String PdfPath() {
         return null;
+//        String path = this.basePath + "/" + year;
+//        return path;
 
     }
 
-    // T
+    // This method is used for generating htmlPath
     public String HtmpPagePath() {
-        return "/Program-File";
+        return null;
+//        String path = this.basePath + "/" + year;
+//        return path;
 
     }
 

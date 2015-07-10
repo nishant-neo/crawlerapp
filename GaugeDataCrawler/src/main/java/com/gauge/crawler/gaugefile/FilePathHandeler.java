@@ -26,19 +26,18 @@ public class FilePathHandeler {
 
     // This method will use for getting the path of text file
     public String getTextFilePath() {
-        return null;
-
+        return filePath.TextPath();
     }
 
     // This method is used for getting the path of pdf file
     public String getPdfFilePath() {
-        return null;
+        return filePath.PdfPath();
 
     }
 
     // This method will used for getting the path of html page 
     public String getHtmlPagePath() {
-        return "/Program-File";
+        return filePath.HtmpPagePath();
 
     }
 
