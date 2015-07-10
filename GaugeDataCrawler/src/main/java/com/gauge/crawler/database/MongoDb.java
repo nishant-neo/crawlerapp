@@ -9,6 +9,6 @@ package com.gauge.crawler.database;
  *
  * @author Abhay
  */
-public class MongoDbDataBase implements DataBase {
+public class MongoDb implements DataBase {
     
 }

@@ -9,6 +9,6 @@ package com.gauge.crawler.database;
  *
  * @author Abhay
  */
-public class MySqlDataBase implements DataBase {
+public class MySqlDb implements DataBase {
 
 }
