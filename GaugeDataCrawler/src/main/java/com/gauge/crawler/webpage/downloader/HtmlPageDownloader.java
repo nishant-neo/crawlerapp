@@ -28,13 +28,10 @@ public class HtmlPageDownloader implements Downloader {
         pathValidator = new PathValidator();
     }
 
-    public final class SessionIdentifierGenerator {
+    private final SecureRandom random = new SecureRandom();
 
-        private final SecureRandom random = new SecureRandom();
-
-        public String nextSessionId() {
-            return new BigInteger(130, random).toString(32);
-        }
+    public String nextSessionId() {
+        return new BigInteger(130, random).toString(32);
     }
 
     @Override
@@ -44,15 +41,15 @@ public class HtmlPageDownloader implements Downloader {
         agent = (BrowserAgent) pool.borrowObject();
         filepath = new FilePath();
 
-        SessionIdentifierGenerator ob11 = new SessionIdentifierGenerator();
+       
         String urlS = (String) url;
         try {
-            String randomvalue = ob11.nextSessionId();
+            String randomvalue = this.nextSessionId();
             agent.visit(urlS);
 
-            String finalpath = filepath.getHtmpPagePath() + "/" +urlS.replaceAll("/", "_") + "_" + randomvalue + ".html";
+            String finalpath = filepath.getHtmpPagePath() + "/" + urlS.replaceAll("/", "_") + "_" + randomvalue + ".html";
             if (!pathValidator.isValid(finalpath)) {
-                System.out.println(finalpath+" path is not valid\nDownloading in error folder");
+                System.out.println(finalpath + " path is not valid\nDownloading in error folder");
                 finalpath = "/error_downloads";
                 ///write to error log
             }
