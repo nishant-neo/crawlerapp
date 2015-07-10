@@ -6,9 +6,9 @@
 package com.gauge.crawler.webpage.downloader;
 
 import com.gauge.crawler.browser.BrowserAgent;
-import com.gauge.crawler.commons.FilePath;
 import static com.gauge.crawler.commons.MainClass.pool;
-import com.gauge.crawler.commons.PathValidator;
+import com.gauge.crawler.gaugefile.FilePathHandeler;
+import com.gauge.crawler.gaugefile.FilePathValidator;
 import com.jaunt.JauntException;
 import java.io.File;
 
@@ -21,11 +21,11 @@ public class PdfDownloader implements Downloader {
 
     BrowserAgent agent;
     String url;
-    FilePath filepath;
-    private final PathValidator pathValidator;
+    FilePathHandeler filepath;
+    private final FilePathValidator pathValidator;
 
     PdfDownloader() {
-        pathValidator = new PathValidator();
+        pathValidator = new FilePathValidator();
     }
 
     @Override
@@ -34,10 +34,10 @@ public class PdfDownloader implements Downloader {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         String urlS = (String) url;
         agent = (BrowserAgent) pool.borrowObject();
-        filepath = new FilePath();
+        filepath = new FilePathHandeler();
 
         try {
-            String path1 = filepath.getPdfPath() + "/" + "test1.pdf";
+            String path1 = filepath.getPdfFilePath() + "/" + "test1.pdf";
 
             if (!pathValidator.isValid(path1)) {
                 System.out.println(path1 + " path is not valid\nDownloading in error folder");

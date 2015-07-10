@@ -5,6 +5,7 @@
  */
 package com.gauge.crawler.commons;
 
+import com.gauge.crawler.gaugefile.FilePathValidator;
 import com.gauge.crawler.webpage.content.DataThread;
 import com.gauge.crawler.webpage.metadata.MetaThread;
 import org.apache.commons.pool.impl.SoftReferenceObjectPool;
@@ -20,7 +21,7 @@ public class MainClass {
 
     public static void main(String[] args) throws Exception {
         System.out.println("hiii im working...");
-        PathValidator p = new PathValidator();
+        FilePathValidator p = new FilePathValidator();
         p.isValid("/home/nitin/NetBeansProjects/GaugeAnalytics/gauge-data/GaugeDataCrawler/nbactions.xml");
         //Thread t1 = new Thread(new DataThread(pool));
         //Thread t2 = new Thread(new DataThread(pool));

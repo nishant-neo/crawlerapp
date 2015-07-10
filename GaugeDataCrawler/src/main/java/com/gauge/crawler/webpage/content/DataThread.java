@@ -6,7 +6,7 @@
 package com.gauge.crawler.webpage.content;
 
 import com.gauge.crawler.browser.BrowserAgent;
-import com.gauge.crawler.commons.FilePath;
+import com.gauge.crawler.gaugefile.FilePathHandeler;
 import com.jaunt.ResponseException;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -21,21 +21,21 @@ import org.apache.commons.pool.impl.SoftReferenceObjectPool;
 public class DataThread implements Runnable {
 
     BrowserAgent agent;
-    FilePath filePath ;
+    FilePathHandeler filePath;
 
     public DataThread(SoftReferenceObjectPool pool) throws Exception {
         agent = (BrowserAgent) pool.borrowObject();
-        filePath = new FilePath();
+        filePath = new FilePathHandeler();
     }
 
     @Override
     public void run() {
         System.out.println("Data Thread created...");
         try {
-            try{
+            try {
                 agent.visit("http://indiankanoon.org/");
                 System.out.println("IndianKanoon opened with vpn");
-            }catch(Exception e){
+            } catch (Exception e) {
                 System.out.println("Url opened without vpn");
                 agent.visit("http://stackoverflow.com/");
             }
@@ -44,7 +44,7 @@ public class DataThread implements Runnable {
             Logger.getLogger(DataThread.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            String finalPath = filePath.getHtmpPagePath() + "/IndianKanoonHomePage.html";
+            String finalPath = filePath.getHtmlPagePath() + "/IndianKanoonHomePage.html";
             agent.doc.saveAs(finalPath);
         } catch (IOException ex) {
             Logger.getLogger(DataThread.class.getName()).log(Level.SEVERE, null, ex);
