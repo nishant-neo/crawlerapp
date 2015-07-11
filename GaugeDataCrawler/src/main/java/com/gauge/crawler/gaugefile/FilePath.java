@@ -5,6 +5,8 @@
  */
 package com.gauge.crawler.gaugefile;
 
+import java.io.File;
+
 /**
  *
  * @author Abhay
@@ -13,10 +15,11 @@ package com.gauge.crawler.gaugefile;
 public class FilePath {
 
     protected String basePath;
+    File file;
 
     protected FilePath() {
         this.basePath = null;
-
+        file = null;
     }
 
 //    // This method will used to set the base path
@@ -27,6 +30,7 @@ public class FilePath {
     protected String TextPath(String urlAndYear) {
         String[] str = urlAndYear.split("[: ]");
         String finalPath = this.basePath + "/textFile/" + this.courtName(str[0]) + "/" + str[1];
+        file = new File(finalPath);
         return finalPath;
     }
 
@@ -34,6 +38,10 @@ public class FilePath {
     protected String PdfPath(String urlAndYear) {
         String[] str = urlAndYear.split("[: ]");
         String finalPath = this.basePath + "/pdfFile/" + this.courtName(str[0]) + "/" + str[1];
+        file = new File(finalPath);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
         return finalPath;
     }
 
@@ -41,6 +49,10 @@ public class FilePath {
     protected String HtmpPagePath(String urlAndYear) {
         String[] str = urlAndYear.split("[: ]");
         String finalPath = this.basePath + "/htmlOriginalPage/" + this.courtName(str[0]) + "/" + str[1];
+        file = new File(finalPath);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
         return finalPath;
     }
 
