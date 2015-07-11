@@ -16,7 +16,7 @@ public class FilePathHandeler {
 
     public FilePathHandeler() {
         filePath = new FilePath();
-        filePathValidator = new FilePathValidator(); 
+        filePathValidator = new FilePathValidator();
     }
 
     // This method will used to set the base path
@@ -25,19 +25,19 @@ public class FilePathHandeler {
     }
 
     // This method will use for getting the path of text file
-    public String getTextFilePath() {
-        return filePath.TextPath();
+    public String getTextFilePath(String urlAndYear) {
+        return filePath.TextPath(urlAndYear);
     }
 
     // This method is used for getting the path of pdf file
-    public String getPdfFilePath() {
-        return filePath.PdfPath();
+    public String getPdfFilePath(String urlAndYear) {
+        return filePath.PdfPath(urlAndYear);
 
     }
 
     // This method will used for getting the path of html page 
-    public String getHtmlPagePath() {
-        return filePath.HtmpPagePath();
+    public String getHtmlPagePath(String urlAndYear) {
+        return filePath.HtmpPagePath(urlAndYear);
 
     }
 
