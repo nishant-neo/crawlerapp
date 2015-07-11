@@ -37,7 +37,7 @@ public class FilePathHandeler {
 
     // This method will used for getting the path of html page 
     public String getHtmlPagePath(String urlAndYear) {
-        return filePath.HtmpPagePath(urlAndYear);
+        return filePath.HtmpPagePath(urlAndYear); 
 
     }
 
