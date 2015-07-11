@@ -8,7 +8,13 @@ package com.gauge.crawler.database;
 /**
  *
  * @author Abhay
+ * @param <T>
  */
-public interface DataBase {
-    
+public interface DataBase<T> {
+
+    public void conectToDbServer();
+
+    public void conectToDataBase();
+
+    public void excuteQuery(T query);
 }
