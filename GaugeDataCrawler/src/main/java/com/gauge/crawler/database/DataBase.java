@@ -12,9 +12,11 @@ package com.gauge.crawler.database;
  */
 public abstract class DataBase<T> {
 
-    public abstract void conectToDbServer();
+    //public abstract void conectToDbServer();
 
     public abstract void conectToDataBase();
+    
+    public abstract void closeDbConnection();
 
-    public abstract void excuteQuery(T query);
+   // public abstract void excuteQuery(T query);
 }
