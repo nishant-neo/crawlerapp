@@ -46,7 +46,7 @@ public class HtmlPageDownloader implements Downloader {
             String randomvalue = this.nextSessionId();
             agent.visit(urlS);
 
-            String finalpath = filepath.getHtmlPagePath() + "/" + urlS.replaceAll("/", "_") + "_" + randomvalue + ".html";
+            String finalpath = filepath.getHtmlPagePath("") + "/" + urlS.replaceAll("/", "_") + "_" + randomvalue + ".html";
             if (!pathValidator.isValid(finalpath)) {
                 System.out.println(finalpath + " path is not valid\nDownloading in error folder");
                 finalpath = "/error_downloads";

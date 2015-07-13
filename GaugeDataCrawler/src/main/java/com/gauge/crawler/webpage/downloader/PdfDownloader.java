@@ -37,7 +37,7 @@ public class PdfDownloader implements Downloader {
         filepath = new FilePathHandeler();
 
         try {
-            String path1 = filepath.getPdfFilePath() + "/" + "test1.pdf";
+            String path1 = filepath.getPdfFilePath("") + "/" + "test1.pdf";
 
             if (!pathValidator.isValid(path1)) {
                 System.out.println(path1 + " path is not valid\nDownloading in error folder");

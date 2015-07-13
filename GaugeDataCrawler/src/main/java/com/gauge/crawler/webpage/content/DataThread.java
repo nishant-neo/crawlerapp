@@ -44,7 +44,7 @@ public class DataThread implements Runnable {
             Logger.getLogger(DataThread.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            String finalPath = filePath.getHtmlPagePath() + "/IndianKanoonHomePage.html";
+            String finalPath = filePath.getHtmlPagePath("") + "/IndianKanoonHomePage.html";
             agent.doc.saveAs(finalPath);
         } catch (IOException ex) {
             Logger.getLogger(DataThread.class.getName()).log(Level.SEVERE, null, ex);
