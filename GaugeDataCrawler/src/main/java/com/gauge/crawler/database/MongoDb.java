@@ -12,17 +12,12 @@ package com.gauge.crawler.database;
 public class MongoDb extends DataBase {
 
     @Override
-    public void conectToDbServer() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public void conectToDataBase() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void excuteQuery(Object query) {
+    public void closeDbConnection() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
