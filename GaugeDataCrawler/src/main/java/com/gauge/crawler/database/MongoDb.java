@@ -9,7 +9,7 @@ package com.gauge.crawler.database;
  *
  * @author Abhay
  */
-public class MongoDb implements DataBase {
+public class MongoDb extends DataBase {
 
     @Override
     public void conectToDbServer() {

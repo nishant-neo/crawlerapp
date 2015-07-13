@@ -9,7 +9,7 @@ package com.gauge.crawler.database;
  *
  * @author Abhay
  */
-public class MySqlDb implements DataBase {
+public class MySqlDb extends DataBase {
 
     @Override
     public void conectToDbServer() {

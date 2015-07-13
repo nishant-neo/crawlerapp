@@ -10,11 +10,11 @@ package com.gauge.crawler.database;
  * @author Abhay
  * @param <T>
  */
-public interface DataBase<T> {
+public abstract class DataBase<T> {
 
-    public void conectToDbServer();
+    public abstract void conectToDbServer();
 
-    public void conectToDataBase();
+    public abstract void conectToDataBase();
 
-    public void excuteQuery(T query);
+    public abstract void excuteQuery(T query);
 }
