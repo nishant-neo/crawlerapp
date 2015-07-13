@@ -16,7 +16,7 @@ public abstract class DataBase<T> {
 
     public abstract void conectToDataBase();
     
-    public abstract void closeDbConnection();
+    public abstract void closeDbConnection(); 
 
    // public abstract void excuteQuery(T query);
 }

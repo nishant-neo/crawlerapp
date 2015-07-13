@@ -58,9 +58,7 @@ public class FilePath {
 
     //This method would generate the name of court
     protected String courtName(String url) {
-        
-        
-        
+
         return null;
     }
 
