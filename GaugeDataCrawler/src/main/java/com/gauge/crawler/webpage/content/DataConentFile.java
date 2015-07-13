@@ -38,6 +38,8 @@ public class DataConentFile implements Content {
     int xPathMethodCounter;
     FilePathHandeler filePathHandeler;
     Writer writer;
+    String url;
+    String year;
 
     public DataConentFile(SoftReferenceObjectPool pool) throws Exception {
         this.pool = pool;
@@ -50,23 +52,32 @@ public class DataConentFile implements Content {
         filePathHandeler = new FilePathHandeler();
     }
 
-    public void openWebSite(String url) throws ResponseException {
+    public void openWebSite() throws ResponseException {
+        String[] str = urlQueue.popUrl().split("[: ]");
+        this.url = str[0];
+        this.year = str[1];
         browserAgent.visit(url);
     }
 
     @Override
     public void extractData() {
-        this.elements = this.browserAgent.doc.findEvery(this.getXpath());
-        this.textData = this.elements.innerText();
+        while (this.textData.equals("")) {// This loop will used for checking the xPath
+            try {
+                this.elements = this.browserAgent.doc.findEvery(this.getXpath());
+                this.textData = this.elements.innerText();
+            } catch (Exception e) {
+                System.out.println("There is no xPath for this page");
+                break;
+            }
+        }
+
     }
 
     @Override
     public void saveData() {
         try {
-            writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(this.filePathHandeler.getTextFilePath("url")), "utf-8"));
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(DataConentFile.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnsupportedEncodingException ex) {
+            writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(this.filePathHandeler.getTextFilePath(year)), "utf-8"));
+        } catch (FileNotFoundException | UnsupportedEncodingException ex) {
             Logger.getLogger(DataConentFile.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
