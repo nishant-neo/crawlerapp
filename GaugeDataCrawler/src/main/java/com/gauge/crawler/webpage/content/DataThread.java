@@ -5,8 +5,8 @@
  */
 package com.gauge.crawler.webpage.content;
 
-import com.gauge.crawler.browser.BrowserAgent;
 import com.gauge.crawler.gaugefile.FilePathHandeler;
+import com.gauge.crawler.url.urlqueue.UrlQueue;
 import org.apache.commons.pool.impl.SoftReferenceObjectPool;
 
 /**
@@ -19,8 +19,8 @@ public class DataThread implements Runnable {
     DataConentFile dataConentFile;
     FilePathHandeler filePath;
 
-    public DataThread(SoftReferenceObjectPool pool) throws Exception {
-        dataConentFile = new DataConentFile(pool);
+    public DataThread(SoftReferenceObjectPool pool, UrlQueue urlQueue) throws Exception {
+        dataConentFile = new DataConentFile(pool, urlQueue);
         filePath = new FilePathHandeler();
     }
 

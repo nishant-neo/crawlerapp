@@ -29,7 +29,7 @@ import org.apache.commons.pool.impl.SoftReferenceObjectPool;
 // This class will responsible for extracting the Meta Data from webpage , and this class is implementing Content interface and overriding the extract method
 public class DataConentFile implements Content {
 
-    private static UrlQueue urlQueue;
+    UrlQueue urlQueue;
     BrowserAgent browserAgent;
     SoftReferenceObjectPool pool;
     String textData;          // Text data extracted,
@@ -41,10 +41,10 @@ public class DataConentFile implements Content {
     String url;
     String year;
 
-    public DataConentFile(SoftReferenceObjectPool pool) throws Exception {
+    public DataConentFile(SoftReferenceObjectPool pool, UrlQueue urlQueue) throws Exception {
         this.pool = pool;
         browserAgent = (BrowserAgent) pool.borrowObject();
-        urlQueue = new UrlQueue();
+        this.urlQueue = urlQueue;
         this.textData = null;
         xPathList = new ArrayList();
         elements = null;
