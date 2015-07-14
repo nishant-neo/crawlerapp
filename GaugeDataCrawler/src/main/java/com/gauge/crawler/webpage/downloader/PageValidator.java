@@ -33,15 +33,14 @@ public class PageValidator implements Validator {
             } catch (Exception ex) {
                 Logger.getLogger(PageValidator.class.getName()).log(Level.SEVERE, null, ex);
             }
-            String Urls = (String) field;
-            agent.visit(Urls); 
-            String htmlData;
-            htmlData = (String)agent.doc.innerHTML();
+            String htmlData = (String) field;
+            
+            
             Tidy tidy = new Tidy();
             InputStream stream = new ByteArrayInputStream(htmlData.getBytes());
             tidy.parse(stream, System.out);
             validCheck = tidy.getParseErrors() == 0;
-        } catch (JauntException e) {         //if an HTTP/connection error occurs, handle JauntException.
+        } catch (Exception e) {         
             System.err.println(e);
         }
         return validCheck;
