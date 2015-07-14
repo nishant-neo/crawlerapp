@@ -5,8 +5,8 @@
  */
 package com.gauge.crawler.commons;
 
+
 import com.gauge.crawler.webpage.content.DataThread;
-import org.apache.commons.pool.impl.SoftReferenceObjectPool;
 
 /**
  *
@@ -14,12 +14,9 @@ import org.apache.commons.pool.impl.SoftReferenceObjectPool;
  */
 public class MainClass {
 
-    private static final BrowserAgentFactory factory = new BrowserAgentFactory();
-    public static final SoftReferenceObjectPool pool = new SoftReferenceObjectPool((factory));
-
     public static void main(String[] args) throws Exception {
         System.out.println("hiii im working...");
-        Thread t1 = new Thread(new DataThread(pool));
+        Thread t1 = new Thread(new DataThread());
         //Thread t2 = new Thread(new DataThread(pool, urlQueue));
         //Thread t3 = new Thread(new MetaThread(pool));
 

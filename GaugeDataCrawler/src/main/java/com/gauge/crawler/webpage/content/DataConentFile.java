@@ -6,6 +6,7 @@
 package com.gauge.crawler.webpage.content;
 
 import com.gauge.crawler.browser.BrowserAgent;
+import com.gauge.crawler.browser.BrowserAgentPool;
 import com.gauge.crawler.commons.Content;
 import com.gauge.crawler.gaugefile.FilePathHandeler;
 import com.jaunt.Elements;
@@ -16,7 +17,6 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.ArrayList;
-import org.apache.commons.pool.impl.SoftReferenceObjectPool;
 
 /**
  *
@@ -26,7 +26,6 @@ import org.apache.commons.pool.impl.SoftReferenceObjectPool;
 public class DataConentFile implements Content {
 
     BrowserAgent browserAgent;
-    SoftReferenceObjectPool pool;
     String textData;          // Text data extracted,
     ArrayList<String> xPathList;// List of Xpath
     Elements elements;
@@ -35,9 +34,10 @@ public class DataConentFile implements Content {
     Writer writer;
     String url;
     String year;
+    BrowserAgentPool pool;
 
-    public DataConentFile(SoftReferenceObjectPool pool) throws Exception {
-        this.pool = pool;
+    public DataConentFile() throws Exception {
+        this.pool = BrowserAgentPool.getPoolObject();
         browserAgent = (BrowserAgent) pool.borrowObject();
         this.textData = "";
         xPathList = new ArrayList();

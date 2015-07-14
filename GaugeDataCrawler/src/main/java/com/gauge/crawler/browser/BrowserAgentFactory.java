@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.gauge.crawler.commons;
+package com.gauge.crawler.browser;
 
 import com.gauge.crawler.proxy.ProxyHandeler;
 import org.apache.commons.pool.BasePoolableObjectFactory;

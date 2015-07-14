@@ -23,9 +23,9 @@ public class DataThread implements Runnable {
     FilePathHandeler filePath;
     UrlQueue urlQueue;
 
-    public DataThread(SoftReferenceObjectPool pool) throws Exception {
+    public DataThread() throws Exception {
         this.urlQueue = UrlQueue.getObject();
-        dataConentFile = new DataConentFile(pool);
+        dataConentFile = new DataConentFile();
         filePath = new FilePathHandeler();
 
     }
