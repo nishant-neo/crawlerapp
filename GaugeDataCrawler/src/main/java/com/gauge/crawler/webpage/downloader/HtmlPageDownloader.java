@@ -26,6 +26,7 @@ public class HtmlPageDownloader implements Downloader {
     private final FilePathValidator pathValidator;
 
     HtmlPageDownloader() {
+        this.filepath = FilePathHandeler.getObject();
         pathValidator = new FilePathValidator();
         this.pool = BrowserAgentPool.getPoolObject();
     }
@@ -41,7 +42,6 @@ public class HtmlPageDownloader implements Downloader {
     public void download(Object url) throws Exception {
         // String  = (String) url; 
         browserAgent = (BrowserAgent) pool.borrowObject();
-        filepath = new FilePathHandeler();
 
         String urlS = (String) url;
         try {

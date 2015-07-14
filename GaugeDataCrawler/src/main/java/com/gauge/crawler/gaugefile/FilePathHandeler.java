@@ -15,10 +15,16 @@ public class FilePathHandeler {
 
     private final FilePath filePath;
     private final FilePathValidator filePathValidator;
+    private static final FilePathHandeler instance = new FilePathHandeler();
 
-    public FilePathHandeler() {
+    private FilePathHandeler() {
         filePath = new FilePath();
         filePathValidator = new FilePathValidator();
+    }
+
+    public static FilePathHandeler getObject() {
+        return instance;
+
     }
 
     // This method will used to set the base path
@@ -35,9 +41,10 @@ public class FilePathHandeler {
         return filePath.TextPath(urlAndYear, text);
     }
 
-    public String getTextFilePath(){
+    public String getTextFilePath() {
         return filePath.TextPath();
     }
+
     // This method is used for getting the path of pdf file
     public String getPdfFilePath(String urlAndYear) {
         return filePath.PdfPath(urlAndYear);

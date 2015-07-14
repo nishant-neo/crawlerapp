@@ -18,8 +18,6 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -47,7 +45,7 @@ public class DataConentFile implements Content {
         xPathList = new ArrayList();
         elements = null;
         xPathMethodCounter = 0;
-        filePathHandeler = new FilePathHandeler();
+        filePathHandeler = FilePathHandeler.getObject();
         this.xPathList.add("<textarea name=\"txtqrydsp\" >");// Xpath for testing 
     }
 

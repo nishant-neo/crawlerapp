@@ -16,19 +16,16 @@ import java.io.File;
 public class FilePath {
 
     protected String basePath;
-    File file;
-    String currentTempPath;
+    private File file;
+    private String currentTempPath;
+    private int fileNumber; // we have to update fileNumber in log files and get file number every time at start of program
 
     protected FilePath() {
         this.basePath = "/home/nitin/NetBeansProjects/GaugeAnalytics/gauge-data/GaugeDataCrawler/Program-File";
         file = null;
+        this.fileNumber = 100;
     }
 
-//    // This method will used to set the base path
-//    public void setBasePath(String basePath) {
-//        this.basePath = basePath;
-//    }
-    // This method is used for generating TextPath
     protected String TextPath(String urlAndYear) throws ArrayIndexOutOfBoundsException {
         String[] str = urlAndYear.split("[; ]");
         //this.courtName(str[2])
@@ -38,7 +35,7 @@ public class FilePath {
             file.mkdirs();
         }
         this.currentTempPath = finalPath;
-        finalPath += "/" + str[2]; // str[2] has file name from metadat
+        finalPath += "/" + str[2] + ".txt"; // str[2] has file name from metadat
         return finalPath;
     }
 
@@ -55,8 +52,9 @@ public class FilePath {
 
     // This overloaded method is used for generating TextPath
     protected String TextPath() {// Read file number form logfiles
-
-        return null;
+        String filePath = this.currentTempPath + "/" + this.fileNumber + ".txt";
+        this.fileNumber++;
+        return filePath;
 
     }
 

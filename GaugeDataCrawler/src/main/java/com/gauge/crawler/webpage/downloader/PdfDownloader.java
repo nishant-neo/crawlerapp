@@ -36,7 +36,7 @@ public class PdfDownloader implements Downloader {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         String urlS = (String) url;
         browserAgent = (BrowserAgent) pool.borrowObject();
-        filepath = new FilePathHandeler();
+        filepath = FilePathHandeler.getObject();
 
         try {
             String path1 = filepath.getPdfFilePath("") + "/" + "test1.pdf";

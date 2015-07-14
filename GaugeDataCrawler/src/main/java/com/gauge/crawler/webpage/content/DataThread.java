@@ -5,8 +5,8 @@
  */
 package com.gauge.crawler.webpage.content;
 
-import com.gauge.crawler.gaugefile.FilePathHandeler;
 import com.gauge.crawler.url.urlqueue.UrlQueue;
+import com.gauge.crawler.webpage.downloader.DownloadingHandeler;
 import com.jaunt.ResponseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,21 +19,20 @@ import java.util.logging.Logger;
 public class DataThread implements Runnable {
 
     DataConentFile dataConentFile;
-    FilePathHandeler filePath;
     UrlQueue urlQueue;
+    DownloadingHandeler downloadingHandeler;
 
     public DataThread() throws Exception {
         this.urlQueue = UrlQueue.getObject();
         dataConentFile = new DataConentFile();
-        filePath = new FilePathHandeler();
-
+        downloadingHandeler = DownloadingHandeler.getObject();
     }
 
     @Override
     public void run() {
         System.out.println("Data Thread called");
 
-        String u = "http://judis.nic.in/judis_andhra/qrydisp.aspx?filename=12564;2014;PETITIONNo.3618OF2014";
+        String u = "http://judis.nic.in/judis_andhra/qrydisp.aspx?filename=12429;2014;CENTRAL_EXCISE_APPEAL_No.24_of2004";
         this.urlQueue.pushUrl(u);
 
         while (this.urlQueue.length() > 0) {
@@ -44,6 +43,12 @@ public class DataThread implements Runnable {
                 try {
                     dataConentFile.openWebSite(url);
                 } catch (ResponseException ex) {
+                    Logger.getLogger(DataThread.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                // This would responsible for downloading original html page
+                try {
+                    this.downloadingHandeler.htmlPageDownloader.download(url);
+                } catch (Exception ex) {
                     Logger.getLogger(DataThread.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 dataConentFile.extractData();
