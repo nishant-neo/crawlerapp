@@ -75,16 +75,7 @@ public class DataConentFile implements Content {
     @Override
     public void saveData() {
         try {
-            Writer writer = null;
-            try {
-                writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(this.filePathHandeler.getTextFilePath(this.url)), "utf-8"));
-            } catch (ArrayIndexOutOfBoundsException ex) {
-                try {
-                    writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(this.filePathHandeler.getTextFilePath(this.url, this.textData)), "utf-8"));
-                } catch (GaugeCrawlerException ex1) {
-                    writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(this.filePathHandeler.getTextFilePath()), "utf-8"));
-                }
-            }
+            writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(this.filePathHandeler.getTextFilePath(this.url, this.textData)), "utf-8"));
             writer.write(this.textData);
             writer.flush();
             writer.close();

@@ -32,7 +32,7 @@ public class DataThread implements Runnable {
     public void run() {
         System.out.println("Data Thread called");
 
-        String u = "http://judis.nic.in/judis_andhra/qrydisp.aspx?filename=12429;2014;CENTRAL_EXCISE_APPEAL_No.24_of2004";
+        String u = "http://judis.nic.in/judis_andhra/qrydisp.aspx?filename=12429;2014";
         this.urlQueue.pushUrl(u);
 
         while (this.urlQueue.length() > 0) {
@@ -46,11 +46,11 @@ public class DataThread implements Runnable {
                     Logger.getLogger(DataThread.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 // This would responsible for downloading original html page
-                try {
-                    this.downloadingHandeler.htmlPageDownloader.download(url);
-                } catch (Exception ex) {
-                    Logger.getLogger(DataThread.class.getName()).log(Level.SEVERE, null, ex);
-                }
+//                try {
+//                    this.downloadingHandeler.htmlPageDownloader.download(url);
+//                } catch (Exception ex) {
+//                    Logger.getLogger(DataThread.class.getName()).log(Level.SEVERE, null, ex);
+//                }
                 dataConentFile.extractData();
                 dataConentFile.saveData();
                 System.out.println("Data extracted ");

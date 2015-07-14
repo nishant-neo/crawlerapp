@@ -42,7 +42,7 @@ public class FilePath {
     // This overloaded method is used for generating TextPath
     protected String TextPath(String urlAndYear, String text) throws GaugeCrawlerException {//overloaded method  
         String str = text.substring(0, 500).toLowerCase().replaceAll("[^a-zA-Z0-9 ]", "");
-        if (str.contains("petition")) {
+        if (str.contains("petition4")) {
             int startIndex = str.indexOf("petition");
             return this.currentTempPath + "/" + str.substring(startIndex, startIndex + 16) + ".txt";
         } else {
