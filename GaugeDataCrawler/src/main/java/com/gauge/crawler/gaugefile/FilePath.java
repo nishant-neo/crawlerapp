@@ -32,6 +32,9 @@ public class FilePath {
         //this.courtName(str[2])
         String finalPath = this.basePath + "/textFile/" + "TextCourt" + "/" + str[1];
         file = new File(finalPath);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
         return finalPath;
     }
 
@@ -55,6 +58,11 @@ public class FilePath {
             file.mkdirs();
         }
         return finalPath;
+    }
+
+    public String textFileName() {// This method will return name of text file
+        return null;
+
     }
 
     //This method would generate the name of court

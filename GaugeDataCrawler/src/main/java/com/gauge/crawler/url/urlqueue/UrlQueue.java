@@ -18,11 +18,16 @@ public class UrlQueue {
 
     private final Queue<String> urlQueue;
     public HashSet<String> visitedUrl;
+    private static final UrlQueue instance = new UrlQueue();
 
-    public UrlQueue() {
+    private UrlQueue() {
         urlQueue = new LinkedList<>();
         visitedUrl = new HashSet();
-        
+    }
+
+    public static UrlQueue getObject() {
+        return instance;
+
     }
 
     //This method would responsible for adding url to queue

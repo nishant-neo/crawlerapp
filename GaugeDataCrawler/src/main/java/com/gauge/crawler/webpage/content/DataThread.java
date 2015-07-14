@@ -23,8 +23,8 @@ public class DataThread implements Runnable {
     FilePathHandeler filePath;
     UrlQueue urlQueue;
 
-    public DataThread(SoftReferenceObjectPool pool, UrlQueue urlQueue) throws Exception {
-        this.urlQueue = urlQueue;
+    public DataThread(SoftReferenceObjectPool pool) throws Exception {
+        this.urlQueue = UrlQueue.getObject();
         dataConentFile = new DataConentFile(pool);
         filePath = new FilePathHandeler();
 
@@ -52,17 +52,11 @@ public class DataThread implements Runnable {
                 System.out.println("Data extracted ");
             }
         }
-//        try {
-//            dataConentFile.closeBrowser();
-//        } catch (Exception ex) {
-//            Logger.getLogger(DataThread.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        try {
-//            Thread.sleep(78548999);
-//        } catch (InterruptedException ex) {
-//            Logger.getLogger(DataThread.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-
+        try {
+            dataConentFile.closeBrowser();
+        } catch (Exception ex) {
+            Logger.getLogger(DataThread.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

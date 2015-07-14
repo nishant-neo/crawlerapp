@@ -8,20 +8,14 @@ package com.gauge.crawler.webpage.content;
 import com.gauge.crawler.browser.BrowserAgent;
 import com.gauge.crawler.commons.Content;
 import com.gauge.crawler.gaugefile.FilePathHandeler;
-import com.gauge.crawler.url.urlqueue.UrlQueue;
 import com.jaunt.Elements;
 import com.jaunt.ResponseException;
 import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.apache.commons.pool.impl.SoftReferenceObjectPool;
 
 /**
@@ -50,8 +44,7 @@ public class DataConentFile implements Content {
         elements = null;
         xPathMethodCounter = 0;
         filePathHandeler = new FilePathHandeler();
-        //this.xPathList.add("jfhgshfgs");
-        this.xPathList.add("<textarea name=\"txtqrydsp\" >");
+        this.xPathList.add("<textarea name=\"txtqrydsp\" >");// Xpath for testing 
     }
 
     public void openWebSite(String url) throws ResponseException {
@@ -79,14 +72,8 @@ public class DataConentFile implements Content {
 
     @Override
     public void saveData() {
-        String tmp = this.filePathHandeler.getTextFilePath(this.url);
-        File file = new File(tmp);
-        if (!file.exists()) {
-            System.out.println("Directory is creating......");
-            file.mkdirs();
-        }
         try {
-            Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(tmp + "/filename.txt"), "utf-8"));
+            Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(this.filePathHandeler.getTextFilePath(this.url) + "/filename.txt"), "utf-8"));
             writer.write(this.textData);
             writer.flush();
             writer.close();

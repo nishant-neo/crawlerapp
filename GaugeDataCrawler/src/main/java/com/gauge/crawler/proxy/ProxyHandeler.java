@@ -53,14 +53,14 @@ public class ProxyHandeler {
 
     private void getProxyType() {// This method will use to get proxy type fro user
         int tmp = 0;
-        System.out.println("Enter 1 for Thread Level Proxy, 2 for System Level Proxy and 3 for No proxy");
+        //System.out.println("Enter 1 for Thread Level Proxy, 2 for System Level Proxy and 3 for No proxy");
         do {                     // This do while loop will use to take correct input from user
             if (tmp > 0) {
                 System.out.println("Enter the correct option, Try again");
                 tmp = 0;
             }
             // proxyType = sc.nextInt(); for testing , we have commented
-            this.proxyType = 3;
+            this.proxyType = 2;
 
             tmp++;
         } while (this.proxyType != 1 && this.proxyType != 2 && this.proxyType != 3);
