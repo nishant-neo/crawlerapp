@@ -5,6 +5,7 @@
  */
 package com.gauge.crawler.gaugefile;
 
+import com.gauge.crawler.exception.GaugeCrawlerException;
 import java.io.File;
 
 /**
@@ -16,6 +17,7 @@ public class FilePath {
 
     protected String basePath;
     File file;
+    String currentTempPath;
 
     protected FilePath() {
         this.basePath = "/home/nitin/NetBeansProjects/GaugeAnalytics/gauge-data/GaugeDataCrawler/Program-File";
@@ -27,7 +29,7 @@ public class FilePath {
 //        this.basePath = basePath;
 //    }
     // This method is used for generating TextPath
-    protected String TextPath(String urlAndYear) {
+    protected String TextPath(String urlAndYear) throws ArrayIndexOutOfBoundsException {
         String[] str = urlAndYear.split("[; ]");
         //this.courtName(str[2])
         String finalPath = this.basePath + "/textFile/" + "TextCourt" + "/" + str[1];
@@ -35,7 +37,27 @@ public class FilePath {
         if (!file.exists()) {
             file.mkdirs();
         }
+        this.currentTempPath = finalPath;
+        finalPath += "/" + str[2]; // str[2] has file name from metadat
         return finalPath;
+    }
+
+    // This overloaded method is used for generating TextPath
+    protected String TextPath(String urlAndYear, String text) throws GaugeCrawlerException {//overloaded method  
+        String str = text.substring(0, 500).toLowerCase().replaceAll("[^a-zA-Z0-9 ]", "");
+        if (str.contains("petition")) {
+            int startIndex = str.indexOf("petition");
+            return this.currentTempPath + "/" + str.substring(startIndex, startIndex + 16) + ".txt";
+        } else {
+            throw new GaugeCrawlerException();
+        }
+    }
+
+    // This overloaded method is used for generating TextPath
+    protected String TextPath() {// Read file number form logfiles
+
+        return null;
+
     }
 
     // This method is used for generating pdfPath
@@ -60,7 +82,7 @@ public class FilePath {
         return finalPath;
     }
 
-    public String textFileName() {// This method will return name of text file
+    public String textFileName(String urlwithFileName) {// This method will return name of text file
         return null;
 
     }

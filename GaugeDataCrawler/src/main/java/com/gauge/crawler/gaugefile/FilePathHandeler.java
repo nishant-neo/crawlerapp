@@ -5,6 +5,8 @@
  */
 package com.gauge.crawler.gaugefile;
 
+import com.gauge.crawler.exception.GaugeCrawlerException;
+
 /**
  *
  * @author Abhay
@@ -25,10 +27,17 @@ public class FilePathHandeler {
     }
 
     // This method will use for getting the path of text file
-    public String getTextFilePath(String urlAndYear) {
+    public String getTextFilePath(String urlAndYear) throws ArrayIndexOutOfBoundsException {
         return filePath.TextPath(urlAndYear);
     }
 
+    public String getTextFilePath(String urlAndYear, String text) throws GaugeCrawlerException {
+        return filePath.TextPath(urlAndYear, text);
+    }
+
+    public String getTextFilePath(){
+        return filePath.TextPath();
+    }
     // This method is used for getting the path of pdf file
     public String getPdfFilePath(String urlAndYear) {
         return filePath.PdfPath(urlAndYear);

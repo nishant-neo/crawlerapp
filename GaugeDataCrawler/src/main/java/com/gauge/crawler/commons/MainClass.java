@@ -5,7 +5,6 @@
  */
 package com.gauge.crawler.commons;
 
-
 import com.gauge.crawler.webpage.content.DataThread;
 
 /**
@@ -17,11 +16,8 @@ public class MainClass {
     public static void main(String[] args) throws Exception {
         System.out.println("hiii im working...");
         Thread t1 = new Thread(new DataThread());
-        //Thread t2 = new Thread(new DataThread(pool, urlQueue));
-        //Thread t3 = new Thread(new MetaThread(pool));
 
         t1.start();
-        // t2.start();
-        //t3.start();
+
     }
 }

@@ -33,7 +33,7 @@ public class DataThread implements Runnable {
     public void run() {
         System.out.println("Data Thread called");
 
-        String u = "http://judis.nic.in/judis_andhra/qrydisp.aspx?filename=12564;2014";
+        String u = "http://judis.nic.in/judis_andhra/qrydisp.aspx?filename=12564;2014;PETITIONNo.3618OF2014";
         this.urlQueue.pushUrl(u);
 
         while (this.urlQueue.length() > 0) {

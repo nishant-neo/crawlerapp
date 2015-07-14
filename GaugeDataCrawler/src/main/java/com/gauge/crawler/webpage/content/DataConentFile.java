@@ -8,6 +8,7 @@ package com.gauge.crawler.webpage.content;
 import com.gauge.crawler.browser.BrowserAgent;
 import com.gauge.crawler.browser.BrowserAgentPool;
 import com.gauge.crawler.commons.Content;
+import com.gauge.crawler.exception.GaugeCrawlerException;
 import com.gauge.crawler.gaugefile.FilePathHandeler;
 import com.jaunt.Elements;
 import com.jaunt.ResponseException;
@@ -17,6 +18,8 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -26,6 +29,7 @@ import java.util.ArrayList;
 public class DataConentFile implements Content {
 
     BrowserAgent browserAgent;
+    BrowserAgentPool pool;
     String textData;          // Text data extracted,
     ArrayList<String> xPathList;// List of Xpath
     Elements elements;
@@ -33,8 +37,8 @@ public class DataConentFile implements Content {
     FilePathHandeler filePathHandeler;
     Writer writer;
     String url;
+    String fileName;
     String year;
-    BrowserAgentPool pool;
 
     public DataConentFile() throws Exception {
         this.pool = BrowserAgentPool.getPoolObject();
@@ -73,7 +77,16 @@ public class DataConentFile implements Content {
     @Override
     public void saveData() {
         try {
-            Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(this.filePathHandeler.getTextFilePath(this.url) + "/filename.txt"), "utf-8"));
+            Writer writer = null;
+            try {
+                writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(this.filePathHandeler.getTextFilePath(this.url)), "utf-8"));
+            } catch (ArrayIndexOutOfBoundsException ex) {
+                try {
+                    writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(this.filePathHandeler.getTextFilePath(this.url, this.textData)), "utf-8"));
+                } catch (GaugeCrawlerException ex1) {
+                    writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(this.filePathHandeler.getTextFilePath()), "utf-8"));
+                }
+            }
             writer.write(this.textData);
             writer.flush();
             writer.close();
