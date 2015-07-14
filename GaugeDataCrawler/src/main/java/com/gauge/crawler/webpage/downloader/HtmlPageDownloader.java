@@ -6,7 +6,7 @@
 package com.gauge.crawler.webpage.downloader;
 
 import com.gauge.crawler.browser.BrowserAgent;
-import static com.gauge.crawler.commons.MainClass.pool;
+import com.gauge.crawler.browser.BrowserAgentPool;
 import com.gauge.crawler.gaugefile.FilePathHandeler;
 import com.gauge.crawler.gaugefile.FilePathValidator;
 import com.jaunt.*;
@@ -20,12 +20,14 @@ import java.security.SecureRandom;
 // This Class will Responsible for downloading the original html page and save to File System
 public class HtmlPageDownloader implements Downloader {
 
-    BrowserAgent agent;
+    BrowserAgent browserAgent;
     FilePathHandeler filepath;
+    BrowserAgentPool pool;
     private final FilePathValidator pathValidator;
 
     HtmlPageDownloader() {
         pathValidator = new FilePathValidator();
+        this.pool = BrowserAgentPool.getPoolObject();
     }
 
     private final SecureRandom random = new SecureRandom();
@@ -38,13 +40,13 @@ public class HtmlPageDownloader implements Downloader {
     // This method will download original html page
     public void download(Object url) throws Exception {
         // String  = (String) url; 
-        agent = (BrowserAgent) pool.borrowObject();
+        browserAgent = (BrowserAgent) pool.borrowObject();
         filepath = new FilePathHandeler();
 
         String urlS = (String) url;
         try {
             String randomvalue = this.nextSessionId();
-            agent.visit(urlS);
+            browserAgent.visit(urlS);
 
             String finalpath = filepath.getHtmlPagePath("") + "/" + urlS.replaceAll("/", "_") + "_" + randomvalue + ".html";
             if (!pathValidator.isValid(finalpath)) {
@@ -52,7 +54,7 @@ public class HtmlPageDownloader implements Downloader {
                 finalpath = "/error_downloads";
                 ///write to error log
             }
-            agent.doc.saveAs(finalpath);
+            browserAgent.doc.saveAs(finalpath);
         } catch (JauntException e) {
             System.err.println(e);
 

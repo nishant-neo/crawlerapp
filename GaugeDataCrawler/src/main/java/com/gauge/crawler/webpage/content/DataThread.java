@@ -10,7 +10,6 @@ import com.gauge.crawler.url.urlqueue.UrlQueue;
 import com.jaunt.ResponseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.apache.commons.pool.impl.SoftReferenceObjectPool;
 
 /**
  *

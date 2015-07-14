@@ -6,7 +6,7 @@
 package com.gauge.crawler.webpage.downloader;
 
 import com.gauge.crawler.browser.BrowserAgent;
-import static com.gauge.crawler.commons.MainClass.pool;
+import com.gauge.crawler.browser.BrowserAgentPool;
 import com.gauge.crawler.gaugefile.FilePathHandeler;
 import com.gauge.crawler.gaugefile.FilePathValidator;
 import com.jaunt.JauntException;
@@ -19,13 +19,15 @@ import java.io.File;
 // THis calss will responsible for downloading and saving the pdf file
 public class PdfDownloader implements Downloader {
 
-    BrowserAgent agent;
+    BrowserAgent browserAgent;
+    BrowserAgentPool pool;
     String url;
     FilePathHandeler filepath;
     private final FilePathValidator pathValidator;
 
     PdfDownloader() {
         pathValidator = new FilePathValidator();
+        this.pool = BrowserAgentPool.getPoolObject();
     }
 
     @Override
@@ -33,7 +35,7 @@ public class PdfDownloader implements Downloader {
     public void download(Object url) throws Exception {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         String urlS = (String) url;
-        agent = (BrowserAgent) pool.borrowObject();
+        browserAgent = (BrowserAgent) pool.borrowObject();
         filepath = new FilePathHandeler();
 
         try {
@@ -45,7 +47,7 @@ public class PdfDownloader implements Downloader {
                 ///write to error log
             }
             File path2 = new File(path1);
-            agent.download(urlS, path2);
+            browserAgent.download(urlS, path2);
 
         } catch (JauntException e) {
             System.err.println(e);

@@ -6,9 +6,8 @@
 package com.gauge.crawler.webpage.downloader;
 
 import com.gauge.crawler.browser.BrowserAgent;
-import static com.gauge.crawler.commons.MainClass.pool;
+import com.gauge.crawler.browser.BrowserAgentPool;
 import com.gauge.crawler.commons.Validator;
-import com.jaunt.JauntException;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.logging.Level;
@@ -22,31 +21,33 @@ import org.w3c.tidy.Tidy;
 // This class will responsible for validating page before downloading
 public class PageValidator implements Validator {
 
-    BrowserAgent agent;
+    BrowserAgent browserAgent;
+    BrowserAgentPool pool;
+
+    PageValidator() {
+        this.pool = BrowserAgentPool.getPoolObject();
+    }
 
     @Override
     public boolean isValid(Object field) {
         boolean validCheck = false;
         try {
             try {
-                agent = (BrowserAgent) pool.borrowObject();                    //create new userAgent (headless browser).
+                browserAgent = (BrowserAgent) pool.borrowObject();                    //create new userAgent (headless browser).
             } catch (Exception ex) {
                 Logger.getLogger(PageValidator.class.getName()).log(Level.SEVERE, null, ex);
             }
             String htmlData = (String) field;
-            
-            
+
             Tidy tidy = new Tidy();
             InputStream stream = new ByteArrayInputStream(htmlData.getBytes());
             tidy.parse(stream, System.out);
             validCheck = tidy.getParseErrors() == 0;
-        } catch (Exception e) {         
+        } catch (Exception e) {
             System.err.println(e);
         }
         return validCheck;
-        }
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        
     }
+    //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 
-
+}
