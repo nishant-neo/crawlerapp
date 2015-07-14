@@ -18,7 +18,7 @@ public class FilePath {
     File file;
 
     protected FilePath() {
-        this.basePath = null;
+        this.basePath = "/home/nitin/NetBeansProjects/GaugeAnalytics/gauge-data/GaugeDataCrawler/Program-File";
         file = null;
     }
 
@@ -28,8 +28,9 @@ public class FilePath {
 //    }
     // This method is used for generating TextPath
     protected String TextPath(String urlAndYear) {
-        String[] str = urlAndYear.split("[: ]");
-        String finalPath = this.basePath + "/textFile/" + this.courtName(str[0]) + "/" + str[1];
+        String[] str = urlAndYear.split("[; ]");
+        //this.courtName(str[2])
+        String finalPath = this.basePath + "/textFile/" + "TextCourt" + "/" + str[1];
         file = new File(finalPath);
         return finalPath;
     }

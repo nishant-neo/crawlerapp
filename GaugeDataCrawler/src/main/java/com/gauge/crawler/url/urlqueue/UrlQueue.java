@@ -5,7 +5,7 @@
  */
 package com.gauge.crawler.url.urlqueue;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -17,10 +17,12 @@ import java.util.Queue;
 public class UrlQueue {
 
     private final Queue<String> urlQueue;
-    private ArrayList<String> visitedUrl;
+    public HashSet<String> visitedUrl;
 
     public UrlQueue() {
         urlQueue = new LinkedList<>();
+        visitedUrl = new HashSet();
+        
     }
 
     //This method would responsible for adding url to queue
@@ -30,13 +32,19 @@ public class UrlQueue {
 
     // This method would responsible for pop Url from url queue
     public String popUrl() {
-        String temp = urlQueue.peek();
+        String temp = urlQueue.remove();
         return temp;
 
     }
 
     // This method add Visited url to used list
-    public void addToVisitedList(String url) {
-        this.visitedUrl.add(url);
+    public boolean addToVisitedList(String url) {
+        boolean temp = this.visitedUrl.add(url);
+        return temp;
+
+    }
+
+    public int length() {
+        return this.urlQueue.size();
     }
 }

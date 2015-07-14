@@ -12,8 +12,10 @@ import com.gauge.crawler.url.urlqueue.UrlQueue;
 import com.jaunt.Elements;
 import com.jaunt.ResponseException;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
@@ -29,7 +31,6 @@ import org.apache.commons.pool.impl.SoftReferenceObjectPool;
 // This class will responsible for extracting the Meta Data from webpage , and this class is implementing Content interface and overriding the extract method
 public class DataConentFile implements Content {
 
-    UrlQueue urlQueue;
     BrowserAgent browserAgent;
     SoftReferenceObjectPool pool;
     String textData;          // Text data extracted,
@@ -41,27 +42,30 @@ public class DataConentFile implements Content {
     String url;
     String year;
 
-    public DataConentFile(SoftReferenceObjectPool pool, UrlQueue urlQueue) throws Exception {
+    public DataConentFile(SoftReferenceObjectPool pool) throws Exception {
         this.pool = pool;
         browserAgent = (BrowserAgent) pool.borrowObject();
-        this.urlQueue = urlQueue;
-        this.textData = null;
+        this.textData = "";
         xPathList = new ArrayList();
         elements = null;
         xPathMethodCounter = 0;
         filePathHandeler = new FilePathHandeler();
+        //this.xPathList.add("jfhgshfgs");
+        this.xPathList.add("<textarea name=\"txtqrydsp\" >");
     }
 
-    public void openWebSite() throws ResponseException {
-        String[] str = urlQueue.popUrl().split("[: ]");
-        this.url = str[0];
-        this.year = str[1];
-        browserAgent.visit(url);
+    public void openWebSite(String url) throws ResponseException {
+        this.url = url;
+        String[] str = url.split("[; ]");
+        System.out.println(str[0]);
+        browserAgent.visit(str[0]);
     }
 
     @Override
     public void extractData() {
+        this.textData = "";
         while (this.textData.equals("")) {// This loop will used for checking the xPath
+            System.out.println("xpath called");
             try {
                 this.elements = this.browserAgent.doc.findEvery(this.getXpath());
                 this.textData = this.elements.innerText();
@@ -70,15 +74,24 @@ public class DataConentFile implements Content {
                 break;
             }
         }
-
+        System.out.println(this.textData);
     }
 
     @Override
     public void saveData() {
+        String tmp = this.filePathHandeler.getTextFilePath(this.url);
+        File file = new File(tmp);
+        if (!file.exists()) {
+            System.out.println("Directory is creating......");
+            file.mkdirs();
+        }
         try {
-            writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(this.filePathHandeler.getTextFilePath(year)), "utf-8"));
-        } catch (FileNotFoundException | UnsupportedEncodingException ex) {
-            Logger.getLogger(DataConentFile.class.getName()).log(Level.SEVERE, null, ex);
+            Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(tmp + "/filename.txt"), "utf-8"));
+            writer.write(this.textData);
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Something wrong........");
         }
     }
 

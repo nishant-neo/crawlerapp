@@ -7,6 +7,9 @@ package com.gauge.crawler.webpage.content;
 
 import com.gauge.crawler.gaugefile.FilePathHandeler;
 import com.gauge.crawler.url.urlqueue.UrlQueue;
+import com.jaunt.ResponseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.commons.pool.impl.SoftReferenceObjectPool;
 
 /**
@@ -18,14 +21,47 @@ public class DataThread implements Runnable {
 
     DataConentFile dataConentFile;
     FilePathHandeler filePath;
+    UrlQueue urlQueue;
 
     public DataThread(SoftReferenceObjectPool pool, UrlQueue urlQueue) throws Exception {
-        dataConentFile = new DataConentFile(pool, urlQueue);
+        this.urlQueue = urlQueue;
+        dataConentFile = new DataConentFile(pool);
         filePath = new FilePathHandeler();
+
     }
 
     @Override
     public void run() {
+        System.out.println("Data Thread called");
+
+        String u = "http://judis.nic.in/judis_andhra/qrydisp.aspx?filename=12564;2014";
+        this.urlQueue.pushUrl(u);
+
+        while (this.urlQueue.length() > 0) {
+            System.out.println("Data extracting");
+            String url = this.urlQueue.popUrl();
+            System.out.println("loop in");
+            if (this.urlQueue.addToVisitedList(url)) {
+                try {
+                    dataConentFile.openWebSite(url);
+                } catch (ResponseException ex) {
+                    Logger.getLogger(DataThread.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                dataConentFile.extractData();
+                dataConentFile.saveData();
+                System.out.println("Data extracted ");
+            }
+        }
+//        try {
+//            dataConentFile.closeBrowser();
+//        } catch (Exception ex) {
+//            Logger.getLogger(DataThread.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        try {
+//            Thread.sleep(78548999);
+//        } catch (InterruptedException ex) {
+//            Logger.getLogger(DataThread.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 
     }
 

@@ -60,7 +60,7 @@ public class ProxyHandeler {
                 tmp = 0;
             }
             // proxyType = sc.nextInt(); for testing , we have commented
-            this.proxyType = 2;
+            this.proxyType = 3;
 
             tmp++;
         } while (this.proxyType != 1 && this.proxyType != 2 && this.proxyType != 3);
