@@ -33,7 +33,7 @@ public class DataThread implements Runnable {
     public void run() {
         System.out.println("Data Thread called");
 
-        String u = "http://164.100.138.36/casest/generatenew.php?path=data/judgment/2015/&fname=CRCR.A125892012.pdf&smflag=N;2014";
+        String u = "http://164.100.138.36/casest/generatenew.php?path=data/judgment/2013old/&fname=CWP51772012.pdf&smflag=N;2014";
         this.urlQueue.pushUrl(u);
 
         while (this.urlQueue.length() > 0) {
@@ -50,6 +50,7 @@ public class DataThread implements Runnable {
                         Logger.getLogger(DataThread.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     dataConentFile.saveData();
+                    this.dataConentFile.filePathHandeler.renameFile(downloadingHandeler.getTempPdfPath(), this.dataConentFile.fileName + ".pdf");
                 } else {// This part is for text page
                     System.out.println("There is no pdf");
                     try {

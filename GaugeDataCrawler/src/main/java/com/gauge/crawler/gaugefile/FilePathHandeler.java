@@ -6,6 +6,7 @@
 package com.gauge.crawler.gaugefile;
 
 import com.gauge.crawler.exception.GaugeCrawlerException;
+import java.io.File;
 
 /**
  *
@@ -64,4 +65,10 @@ public class FilePathHandeler {
         return this.filePathValidator.isValid(path);
     }
 
+    public boolean renameFile(String oldName, String newName) {
+        File f = new File(oldName);
+        File f2 = new File(newName);
+        boolean bool = f.renameTo(f2);
+        return bool;
+    }
 }

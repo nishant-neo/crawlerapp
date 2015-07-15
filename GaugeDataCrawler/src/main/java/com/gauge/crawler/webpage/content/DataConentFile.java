@@ -40,7 +40,7 @@ public class DataConentFile implements Content {
     FilePathHandeler filePathHandeler;
     Writer writer;
     String url;
-    String fileName;
+    String fileName; // This have current file name
     String year;
 
     public DataConentFile() throws Exception {
@@ -79,8 +79,9 @@ public class DataConentFile implements Content {
 
     @Override
     public void saveData() {
+        this.fileName = this.filePathHandeler.getTextFilePath(this.url, this.textData);
         try {
-            writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(this.filePathHandeler.getTextFilePath(this.url, this.textData)), "utf-8"));
+            writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(this.fileName + ".txt"), "utf-8"));
             writer.write(this.textData);
             writer.flush();
             writer.close();

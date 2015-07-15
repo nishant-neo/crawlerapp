@@ -35,7 +35,7 @@ public class FilePath {
             file.mkdirs();
         }
         this.currentTempPath = finalPath;
-        finalPath += "/" + str[2] + ".txt"; // str[2] has file name from metadat
+        finalPath += "/" + str[2]; // str[2] has file name from metadat
         return finalPath;
     }
 
@@ -44,7 +44,7 @@ public class FilePath {
         String str = text.substring(0, 500).toLowerCase().replaceAll("[^a-zA-Z0-9 ]", "");
         if (str.contains("petition")) {
             int startIndex = str.indexOf("petition");
-            return this.currentTempPath + "/" + str.substring(startIndex, startIndex + 16) + ".txt";
+            return this.currentTempPath + "/" + str.substring(startIndex, startIndex + 16);
         } else {
             throw new GaugeCrawlerException();
         }
@@ -52,7 +52,7 @@ public class FilePath {
 
     // This overloaded method is used for generating TextPath
     protected String TextPath() {// Read file number form logfiles
-        String filePath = this.currentTempPath + "/" + this.fileNumber + ".txt";
+        String filePath = this.currentTempPath + "/" + this.fileNumber;
         this.fileNumber++;
         return filePath;
 
