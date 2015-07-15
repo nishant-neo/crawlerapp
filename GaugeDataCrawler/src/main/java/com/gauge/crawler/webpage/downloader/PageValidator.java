@@ -45,6 +45,12 @@ public class PageValidator implements Validator {
             validCheck = tidy.getParseErrors() == 0;
         } catch (Exception e) {
             System.err.println(e);
+        } finally {
+            try {
+                pool.returnObject(browserAgent);
+            } catch (Exception ex) {
+                Logger.getLogger(PageValidator.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return validCheck;
     }
