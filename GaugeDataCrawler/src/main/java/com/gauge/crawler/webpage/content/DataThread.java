@@ -50,7 +50,8 @@ public class DataThread implements Runnable {
                         Logger.getLogger(DataThread.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     dataConentFile.saveData();
-                    this.dataConentFile.filePathHandeler.renameFile(downloadingHandeler.getTempPdfPath(), this.dataConentFile.fileName + ".pdf");
+                    String[] tmp = this.dataConentFile.fileName.split("/");
+                    this.dataConentFile.filePathHandeler.renameFile(downloadingHandeler.getTempPdfPath(), downloadingHandeler.getTempPdfPath().substring(0, downloadingHandeler.getTempPdfPath().length() - 8) + tmp[tmp.length - 1].substring(0, tmp[tmp.length - 1].length() - 4) + ".pdf");
                 } else {// This part is for text page
                     System.out.println("There is no pdf");
                     try {

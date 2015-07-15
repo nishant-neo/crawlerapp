@@ -36,7 +36,7 @@ public class PdfDownloader implements Downloader {
         this.tempPdfPath = filePath;
         File path = new File(filePath);
         System.out.println(path.getAbsolutePath());
-        System.out.println("Visiting this url ------------ " + temp[0]);
+        System.out.println("Visiting this url ------------ " + path);
         browserAgent.download(temp[0], path);
         pool.returnObject(browserAgent);
     }

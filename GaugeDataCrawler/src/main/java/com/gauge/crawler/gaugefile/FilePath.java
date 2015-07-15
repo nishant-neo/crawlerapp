@@ -21,7 +21,7 @@ public class FilePath {
     private int fileNumber; // we have to update fileNumber in log files and get file number every time at start of program
 
     protected FilePath() {
-        this.basePath = "/home/nitin/NetBeansProjects/GaugeAnalytics/gauge-data/GaugeDataCrawler/Program-File";
+        this.basePath = "/home/abhay/NetBeansProjects/gauge-data/GaugeDataCrawler/Program-File";
         file = null;
         this.fileNumber = 100;
     }
@@ -29,13 +29,13 @@ public class FilePath {
     protected String TextPath(String urlAndYear) throws ArrayIndexOutOfBoundsException {
         String[] str = urlAndYear.split("[; ]");
         //this.courtName(str[2])
-        String finalPath = this.basePath + "/textFile/" + "CourtName" + "/" + str[1] + ".txt";
+        String finalPath = this.basePath + "/textFile/" + "CourtName" + "/" + str[1];
         file = new File(finalPath);
         if (!file.exists()) {
             file.mkdirs();
         }
         this.currentTempPath = finalPath;
-        finalPath += "/" + str[2]; // str[2] has file name from metadat
+        finalPath += "/" + str[2] + ".txt"; // str[2] has file name from metadat
         return finalPath;
     }
 
