@@ -17,7 +17,7 @@ import java.io.*;
 public class RobotTxtDownloader implements Downloader {
 
     @Override
-    public void download(Object url) throws Exception {
+    public void download(String url) throws Exception {
         URL link = new URL((String) url + "/robots.txt");
         InputStream in = link.openStream();
         String inputStreamString = new Scanner(in, "UTF-8").useDelimiter("\\A").next();

@@ -29,7 +29,7 @@ public class FilePath {
     protected String TextPath(String urlAndYear) throws ArrayIndexOutOfBoundsException {
         String[] str = urlAndYear.split("[; ]");
         //this.courtName(str[2])
-        String finalPath = this.basePath + "/textFile/" + "TextCourt" + "/" + str[1];
+        String finalPath = this.basePath + "/textFile/" + "CourtName" + "/" + str[1];
         file = new File(finalPath);
         if (!file.exists()) {
             file.mkdirs();
@@ -42,7 +42,7 @@ public class FilePath {
     // This overloaded method is used for generating TextPath
     protected String TextPath(String urlAndYear, String text) throws GaugeCrawlerException {//overloaded method  
         String str = text.substring(0, 500).toLowerCase().replaceAll("[^a-zA-Z0-9 ]", "");
-        if (str.contains("petition4")) {
+        if (str.contains("petition")) {
             int startIndex = str.indexOf("petition");
             return this.currentTempPath + "/" + str.substring(startIndex, startIndex + 16) + ".txt";
         } else {
@@ -60,8 +60,8 @@ public class FilePath {
 
     // This method is used for generating pdfPath
     protected String PdfPath(String urlAndYear) {
-        String[] str = urlAndYear.split("[: ]");
-        String finalPath = this.basePath + "/pdfFile/" + this.courtName(str[0]) + "/" + str[1];
+        String[] str = urlAndYear.split("[; ]");
+        String finalPath = this.basePath + "/pdfFile/" + "CourtName" + "/" + str[1];
         file = new File(finalPath);
         if (!file.exists()) {
             file.mkdirs();

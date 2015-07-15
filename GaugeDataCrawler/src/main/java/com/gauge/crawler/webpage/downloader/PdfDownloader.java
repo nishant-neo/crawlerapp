@@ -8,8 +8,6 @@ package com.gauge.crawler.webpage.downloader;
 import com.gauge.crawler.browser.BrowserAgent;
 import com.gauge.crawler.browser.BrowserAgentPool;
 import com.gauge.crawler.gaugefile.FilePathHandeler;
-import com.gauge.crawler.gaugefile.FilePathValidator;
-import com.jaunt.JauntException;
 import java.io.File;
 
 /**
@@ -21,37 +19,26 @@ public class PdfDownloader implements Downloader {
 
     BrowserAgent browserAgent;
     BrowserAgentPool pool;
-    String url;
-    FilePathHandeler filepath;
-    private final FilePathValidator pathValidator;
+    FilePathHandeler filePathHandeler;
+    String tempPdfPath; // temp path of pdf
 
-    PdfDownloader() {
-        pathValidator = new FilePathValidator();
+    protected PdfDownloader() {
+        filePathHandeler = FilePathHandeler.getObject();
         this.pool = BrowserAgentPool.getPoolObject();
     }
 
     @Override
-    //This method will download pdf file
-    public void download(Object url) throws Exception {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        String urlS = (String) url;
+    //This method would download the pdf file
+    public void download(String url) throws Exception {
+        String[] temp = url.split("[; ]");
         browserAgent = (BrowserAgent) pool.borrowObject();
-        filepath = FilePathHandeler.getObject();
-
-        try {
-            String path1 = filepath.getPdfFilePath("") + "/" + "test1.pdf";
-
-            if (!pathValidator.isValid(path1)) {
-                System.out.println(path1 + " path is not valid\nDownloading in error folder");
-                path1 = "/error_downloads";
-                ///write to error log
-            }
-            File path2 = new File(path1);
-            browserAgent.download(urlS, path2);
-
-        } catch (JauntException e) {
-            System.err.println(e);
-        }
+        String filePath = this.filePathHandeler.getPdfFilePath(url) + "/" + "temp.pdf";
+        this.tempPdfPath = filePath;
+        File path = new File(filePath);
+        System.out.println(path.getAbsolutePath());
+        System.out.println("Visiting this url ------------ " + temp[0]);
+        browserAgent.download(temp[0], path);
+        pool.returnObject(browserAgent);
     }
 
 }

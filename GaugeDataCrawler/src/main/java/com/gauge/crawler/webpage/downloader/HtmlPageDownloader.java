@@ -39,7 +39,7 @@ public class HtmlPageDownloader implements Downloader {
 
     @Override
     // This method will download original html page
-    public void download(Object url) throws Exception {
+    public void download(String url) throws Exception {
         // String  = (String) url; 
         browserAgent = (BrowserAgent) pool.borrowObject();
 

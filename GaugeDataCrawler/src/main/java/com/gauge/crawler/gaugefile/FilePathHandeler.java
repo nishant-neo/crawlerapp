@@ -49,6 +49,7 @@ public class FilePathHandeler {
 
     // This method is used for getting the path of pdf file
     public String getPdfFilePath(String urlAndYear) {
+        String path;
         return filePath.PdfPath(urlAndYear);
 
     }

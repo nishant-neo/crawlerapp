@@ -90,7 +90,8 @@ public class DataConentFile implements Content {
     }
 
     // This method will extract text from pdf at runtime after just downloading pdf file
-    public void getTextFromPdf(String pdfPath) throws GaugeParsingException {
+    public void getTextFromPdf(String pdfPath, String urlWithAllData) throws GaugeParsingException {
+        this.url = urlWithAllData;
         this.textData = "";
         PDFParser parser;
         PDFTextStripper pdfStripper;
@@ -99,7 +100,6 @@ public class DataConentFile implements Content {
         try {
             parser = new PDFParser(new FileInputStream(pdfPath));
         } catch (IOException e) {
-            System.err.println("Unable to open PDF Parser. " + e.getMessage());
             throw new GaugeParsingException();
         }
         try {
@@ -111,8 +111,7 @@ public class DataConentFile implements Content {
             pdfStripper.setEndPage(5);
             this.textData = pdfStripper.getText(pdDoc);
         } catch (Exception e) {
-            System.out.println("Something wrong in this pdf document");
-            this.textData = "";
+            throw new GaugeParsingException();
         } finally {
             try {
                 if (cosDoc != null) {
