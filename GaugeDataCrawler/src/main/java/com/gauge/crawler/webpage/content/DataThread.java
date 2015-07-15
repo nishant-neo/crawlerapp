@@ -53,6 +53,7 @@ public class DataThread implements Runnable {
                     String[] tmp = this.dataConentFile.fileName.split("/");
                     this.dataConentFile.filePathHandeler.renameFile(downloadingHandeler.getTempPdfPath(), downloadingHandeler.getTempPdfPath().substring(0, downloadingHandeler.getTempPdfPath().length() - 8) + tmp[tmp.length - 1].substring(0, tmp[tmp.length - 1].length() - 4) + ".pdf");
                 } else {// This part is for text page
+                   // this.downloadingHandeler.htmlPageDownloader.download(url);
                     System.out.println("There is no pdf");
                     try {
                         dataConentFile.openWebSite(url);
