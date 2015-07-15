@@ -29,7 +29,7 @@ public class FilePath {
     protected String TextPath(String urlAndYear) throws ArrayIndexOutOfBoundsException {
         String[] str = urlAndYear.split("[; ]");
         //this.courtName(str[2])
-        String finalPath = this.basePath + "/textFile/" + "CourtName" + "/" + str[1];
+        String finalPath = this.basePath + "/textFile/" + "CourtName" + "/" + str[1] + ".txt";
         file = new File(finalPath);
         if (!file.exists()) {
             file.mkdirs();
@@ -44,7 +44,7 @@ public class FilePath {
         String str = text.substring(0, 500).toLowerCase().replaceAll("[^a-zA-Z0-9 ]", "");
         if (str.contains("petition")) {
             int startIndex = str.indexOf("petition");
-            return this.currentTempPath + "/" + str.substring(startIndex, startIndex + 16);
+            return this.currentTempPath + "/" + str.substring(startIndex, startIndex + 16) + ".txt";
         } else {
             throw new GaugeCrawlerException();
         }
@@ -52,7 +52,7 @@ public class FilePath {
 
     // This overloaded method is used for generating TextPath
     protected String TextPath() {// Read file number form logfiles
-        String filePath = this.currentTempPath + "/" + this.fileNumber;
+        String filePath = this.currentTempPath + "/" + this.fileNumber + ".txt";
         this.fileNumber++;
         return filePath;
 

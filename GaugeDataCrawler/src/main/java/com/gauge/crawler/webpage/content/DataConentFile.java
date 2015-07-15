@@ -81,7 +81,7 @@ public class DataConentFile implements Content {
     public void saveData() {
         this.fileName = this.filePathHandeler.getTextFilePath(this.url, this.textData);
         try {
-            writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(this.fileName + ".txt"), "utf-8"));
+            writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(this.fileName), "utf-8"));
             writer.write(this.textData);
             writer.flush();
             writer.close();
