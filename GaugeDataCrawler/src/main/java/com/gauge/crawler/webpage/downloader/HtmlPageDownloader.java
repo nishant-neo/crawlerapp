@@ -58,6 +58,8 @@ public class HtmlPageDownloader implements Downloader {
         } catch (JauntException e) {
             System.err.println(e);
 
+        } finally {
+            this.pool = BrowserAgentPool.getPoolObject();
         }
 
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
