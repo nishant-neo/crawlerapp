@@ -71,6 +71,11 @@
             <artifactId>jtidy</artifactId>
             <version>4aug2000r7-dev</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox</artifactId>
+            <version>1.8.9</version>
+        </dependency>
     </dependencies>   
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
