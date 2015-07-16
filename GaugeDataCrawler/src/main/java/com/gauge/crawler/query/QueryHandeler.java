@@ -104,7 +104,7 @@ public class QueryHandeler {
                         System.out.println("check");
                         var = variablesJudis(data);
                         System.out.println("check");
-                        while (true) {
+                        while (true){
                             int index = 0;
                             int foundAt = -1;
                             int count = 1;
@@ -134,8 +134,7 @@ public class QueryHandeler {
                                 break;
                         }
                     }
-                           
-                }
+                   }
 
                 //Himanchal Pradesh   
                  else if (Links[iterator] == "http://164.100.138.36/casest/order/date-query.php") {
