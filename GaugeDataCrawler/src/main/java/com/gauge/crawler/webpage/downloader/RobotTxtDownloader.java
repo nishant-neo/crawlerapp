@@ -15,6 +15,11 @@ import java.io.*;
  */
 // This class will responsible for downloading and saving the Robot.Txt file
 public class RobotTxtDownloader implements Downloader {
+    public Map<String, String> map = new HashMap<String, String>();
+    
+    public RobotTxtDownloader(){
+        map.put("link", "1");
+    }
 
     @Override
     public void download(String url) throws Exception {
@@ -26,7 +31,7 @@ public class RobotTxtDownloader implements Downloader {
         File file;
         String content = inputStreamString;
         try {
-            file = new File("/Program-File/link" + "vfv" + ".txt");
+            file = new File("/Program-File/link" + map.get((String)url) + ".txt");
             fop = new FileOutputStream(file);
             // if file doesnt exists, then create it
             if (!file.exists()) {
