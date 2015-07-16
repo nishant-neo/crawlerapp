@@ -6,6 +6,7 @@
 package com.gauge.crawler.url;
 
 import com.gauge.crawler.commons.Validator;
+import com.gauge.crawler.webpage.downloader.RobotTxtDownloader;
 
 /**
  *
@@ -17,8 +18,12 @@ public class UrlValidatorByRobotTxt implements Validator {
     public boolean isValid(Object field) {
          //throw new UnsupportedOperationException("Not supported yet."); 
         //To change body of generated methods, choose Tools | Templates.
-        String robots = field.toString();
-        String link = "http://www.flipkart.com/dynamic/";
+        //String robots = field.toString();
+        RobotTxtDownloader obj = new RobotTxtDownloader();
+        String link = (String) field;
+        int slashslash = link.indexOf("//") + 6;
+        String domain = link.substring(slashslash, link.indexOf('.', slashslash));
+        obj.map.get(domain)+ ".txt"
          //Some method to access the file that contains the robots.txt for a particular domain. 
         //String robots = "";// Convert the contents to String data  type
         int firstIndex, lastIndex, searched = 0, nextUseragent, flag = 1;
