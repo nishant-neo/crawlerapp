@@ -5,7 +5,9 @@
  */
 package com.gauge.crawler.webpage.downloader;
 
-import java.net.URL;
+import com.gauge.crawler.browser.BrowserAgent;
+import com.gauge.crawler.browser.BrowserAgentPool;
+import com.gauge.crawler.gaugefile.FilePathHandeler;
 import java.util.*;
 import java.io.*;
 
@@ -16,35 +18,35 @@ import java.io.*;
 // This class will responsible for downloading and saving the Robot.Txt file
 public class RobotTxtDownloader implements Downloader {
     public Map<String, String> map = new HashMap<String, String>();
+    BrowserAgent browserAgent;
+    BrowserAgentPool pool;
+    FilePathHandeler filePathHandeler;
+    String tempPdfPath; // temp path of pdf
     
     public RobotTxtDownloader(){
-        map.put("link", "1");
+        map.put("judis", "1");
+        map.put("dspace", "2");
+        map.put("lobis", "3");
+        map.put("164.100.138.36", "4");
+        map.put("jhr", "5");
+        map.put("courtnic", "6");
+        map.put("judgementhck", "7");
+        map.put("mphc", "8");
+        map.put("rhccasestatus", "9");
     }
 
     @Override
     public void download(String url) throws Exception {
-        URL link = new URL((String) url + "/robots.txt");
-        InputStream in = link.openStream();
-        String inputStreamString = new Scanner(in, "UTF-8").useDelimiter("\\A").next();
-        System.out.println(inputStreamString);
-        FileOutputStream fop = null;
-        File file;
-        String content = inputStreamString;
+        int slashslash = url.indexOf("//") + 6;
+        String domain = url.substring(slashslash, url.indexOf('.', slashslash));
+        
         try {
-            file = new File("/Program-File/link" + map.get((String)url) + ".txt");
-            fop = new FileOutputStream(file);
-            // if file doesnt exists, then create it
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-            // get the content in bytes
-            byte[] contentInBytes = content.getBytes();
-            fop.write(contentInBytes);
-            fop.flush();
-            fop.close();
-            //System.out.println("Done");
-        } catch (IOException e) {
-            e.printStackTrace();
+            browserAgent = (BrowserAgent) pool.borrowObject();
+            File path = new File("/Program-File/link" + map.get((String)domain) + ".txt");
+            browserAgent.download(url,path );
+        } finally {
+            pool.returnObject(browserAgent);// Returning BrowserAgent to pool
         }
+       
     }
 }
