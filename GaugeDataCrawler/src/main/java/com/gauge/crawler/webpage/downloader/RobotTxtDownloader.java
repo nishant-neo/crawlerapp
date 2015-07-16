@@ -42,7 +42,7 @@ public class RobotTxtDownloader implements Downloader {
         
         try {
             browserAgent = (BrowserAgent) pool.borrowObject();
-            File path = new File("/Program-File/link" + map.get((String)domain) + ".txt");
+            File path = new File("/Program-File/robots/" + map.get((String)domain) + ".txt");
             browserAgent.download(url,path );
         } finally {
             pool.returnObject(browserAgent);// Returning BrowserAgent to pool

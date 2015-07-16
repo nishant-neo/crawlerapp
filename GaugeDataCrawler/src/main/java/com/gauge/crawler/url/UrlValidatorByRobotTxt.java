@@ -7,6 +7,9 @@ package com.gauge.crawler.url;
 
 import com.gauge.crawler.commons.Validator;
 import com.gauge.crawler.webpage.downloader.RobotTxtDownloader;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 /**
  *
@@ -16,16 +19,29 @@ public class UrlValidatorByRobotTxt implements Validator {
 
     @Override
     public boolean isValid(Object field) {
-         //throw new UnsupportedOperationException("Not supported yet."); 
-        //To change body of generated methods, choose Tools | Templates.
-        //String robots = field.toString();
+        String robots = "";
         RobotTxtDownloader obj = new RobotTxtDownloader();
         String link = (String) field;
         int slashslash = link.indexOf("//") + 6;
         String domain = link.substring(slashslash, link.indexOf('.', slashslash));
-        obj.map.get(domain)+ ".txt"
-         //Some method to access the file that contains the robots.txt for a particular domain. 
-        //String robots = "";// Convert the contents to String data  type
+        BufferedReader br = null;
+        try {
+            String sCurrentLine;
+            br = new BufferedReader(new FileReader("/Program-File/robots"+obj.map.get(domain) + ".txt"));
+            while ((sCurrentLine = br.readLine()) != null) {
+                robots = robots + sCurrentLine + "\n";
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (br != null) {
+                    br.close();
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
         int firstIndex, lastIndex, searched = 0, nextUseragent, flag = 1;
         //Extracting all the disallowed links and comparing to the url provided
         while (robots.indexOf("User-agent: *", searched) != -1) {
