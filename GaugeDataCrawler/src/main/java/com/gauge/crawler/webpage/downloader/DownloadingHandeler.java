@@ -52,8 +52,12 @@ public class DownloadingHandeler {
         return this.pdfDownloader.tempPdfPath;
     }
 
-    public void downloadHTML() {
-
+    public void downloadHTML(String urlString) { // Responsible for downloading HTML, we have have handle exception 
+        try {
+            this.htmlPageDownloader.download(urlString);
+        } catch (Exception ex) {
+            Logger.getLogger(DownloadingHandeler.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     // This method will responsible for checking url at run time, for that url has pdf or text

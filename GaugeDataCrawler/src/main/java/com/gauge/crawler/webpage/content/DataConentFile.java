@@ -51,6 +51,7 @@ public class DataConentFile implements Content {
         elements = null;
         xPathMethodCounter = 0;
         filePathHandeler = FilePathHandeler.getObject();
+        this.filePathHandeler.setBasePath();
         this.xPathList.add("<textarea name=\"txtqrydsp\" >");// Xpath for testing 
     }
 

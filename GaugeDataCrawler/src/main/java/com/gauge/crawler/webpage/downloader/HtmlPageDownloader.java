@@ -8,10 +8,7 @@ package com.gauge.crawler.webpage.downloader;
 import com.gauge.crawler.browser.BrowserAgent;
 import com.gauge.crawler.browser.BrowserAgentPool;
 import com.gauge.crawler.gaugefile.FilePathHandeler;
-import com.gauge.crawler.gaugefile.FilePathValidator;
 import com.jaunt.*;
-import java.math.BigInteger;
-import java.security.SecureRandom;
 
 /**
  *
@@ -21,48 +18,31 @@ import java.security.SecureRandom;
 public class HtmlPageDownloader implements Downloader {
 
     BrowserAgent browserAgent;
-    FilePathHandeler filepath;
+    FilePathHandeler filePathHandeler;
     BrowserAgentPool pool;
-    private final FilePathValidator pathValidator;
 
     HtmlPageDownloader() {
-        this.filepath = FilePathHandeler.getObject();
-        pathValidator = new FilePathValidator();
+        this.filePathHandeler = FilePathHandeler.getObject();
         this.pool = BrowserAgentPool.getPoolObject();
-    }
-
-    private final SecureRandom random = new SecureRandom();
-
-    public String nextSessionId() {
-        return new BigInteger(130, random).toString(32);
     }
 
     @Override
     // This method will download original html page
-    public void download(String url) throws Exception {
+    public void download(String urlString) throws Exception {
         // String  = (String) url; 
         browserAgent = (BrowserAgent) pool.borrowObject();
 
-        String urlS = (String) url;
+        String[] tempUrl = urlString.split("[; ]");
         try {
-            String randomvalue = this.nextSessionId();
-            browserAgent.visit(urlS);
-
-            String finalpath = filepath.getHtmlPagePath("") + "/" + urlS.replaceAll("/", "_") + "_" + randomvalue + ".html";
-            if (!pathValidator.isValid(finalpath)) {
-                System.out.println(finalpath + " path is not valid\nDownloading in error folder");
-                finalpath = "/error_downloads";
-                ///write to error log
-            }
-            browserAgent.doc.saveAs(finalpath);
+            browserAgent.visit(tempUrl[0]);
+            String filePath = this.filePathHandeler.getHtmlPagePath(urlString) + ".html";
+            browserAgent.doc.saveAs(filePath);
         } catch (JauntException e) {
             System.err.println(e);
 
         } finally {
             this.pool = BrowserAgentPool.getPoolObject();
         }
-
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

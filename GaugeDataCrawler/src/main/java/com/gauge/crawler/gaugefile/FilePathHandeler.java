@@ -7,6 +7,7 @@ package com.gauge.crawler.gaugefile;
 
 import com.gauge.crawler.exception.GaugeCrawlerException;
 import java.io.File;
+import java.util.Scanner;
 
 /**
  *
@@ -17,8 +18,10 @@ public class FilePathHandeler {
     private final FilePath filePath;
     private final FilePathValidator filePathValidator;
     private static final FilePathHandeler instance = new FilePathHandeler();
+    Scanner sc;
 
     private FilePathHandeler() {
+        sc = new Scanner(System.in);
         filePath = new FilePath();
         filePathValidator = new FilePathValidator();
     }
@@ -28,9 +31,19 @@ public class FilePathHandeler {
 
     }
 
-    // This method will used to set the base path
-    public void setBasePath(String basePath) {
-        filePath.basePath = basePath;
+    // This method will used to change the default base path to new BasePath
+    public void setBasePath() {
+//        System.out.println("Do You Want To Change Default OutPut Folder Path Enter [Y/N] ");
+//        String temp = this.sc.next();
+        String temp = "n"; //it is used for testing
+        if (temp.equalsIgnoreCase("y")) {
+            System.out.println("Now Enter the OutPut Folder Path");
+            temp = this.sc.next() ;
+            this.filePath.basePath = temp + "/CrawlerOutPut";
+        } else {
+            this.filePath.basePath = System.getProperty("user.dir") + "/CrawlerOutPut";
+            // System.out.println("This is base path "+this.filePath.basePath);
+        }
     }
 
     // This method will use for getting the path of text file

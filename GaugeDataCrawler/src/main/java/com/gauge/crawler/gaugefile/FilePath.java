@@ -21,7 +21,6 @@ public class FilePath {
     private int fileNumber; // we have to update fileNumber in log files and get file number every time at start of program
 
     protected FilePath() {
-        this.basePath = "/home/abhay/NetBeansProjects/gauge-data/GaugeDataCrawler/Program-File";
         file = null;
         this.fileNumber = 100;
     }
