@@ -29,16 +29,20 @@ public class PdfDownloader implements Downloader {
 
     @Override
     //This method would download the pdf file
-    public void download(String url) throws Exception {
+    public void download(String url) throws Exception { // We have to handle exception of this method
         String[] temp = url.split("[; ]");
-        browserAgent = (BrowserAgent) pool.borrowObject();
-        String filePath = this.filePathHandeler.getPdfFilePath(url) + "/" + "temp.pdf";
-        this.tempPdfPath = filePath;
-        File path = new File(filePath);
-        System.out.println(path.getAbsolutePath());
-        System.out.println("Visiting this url ------------ " + path);
-        browserAgent.download(temp[0], path);
-        pool.returnObject(browserAgent);
+        try {
+            browserAgent = (BrowserAgent) pool.borrowObject();
+            String filePath = this.filePathHandeler.getPdfFilePath(url) + "/" + "temp.pdf";
+            this.tempPdfPath = filePath;
+            File path = new File(filePath);
+            System.out.println(path.getAbsolutePath());
+            System.out.println("Visiting this url ------------ " + path);
+            browserAgent.download(temp[0], path);
+        } finally {
+            pool.returnObject(browserAgent);// Returning BrowserAgent to pool
+        }
+
     }
 
 }

@@ -30,7 +30,7 @@ public class HtmlPageDownloader implements Downloader {
     // This method will download original html page
     public void download(String urlString) throws Exception {
         // String  = (String) url; 
-        browserAgent = (BrowserAgent) pool.borrowObject();
+        browserAgent = (BrowserAgent) pool.borrowObject(); // Taking BrowserAgent from pool
 
         String[] tempUrl = urlString.split("[; ]");
         try {
@@ -38,10 +38,9 @@ public class HtmlPageDownloader implements Downloader {
             String filePath = this.filePathHandeler.getHtmlPagePath(urlString) + ".html";
             browserAgent.doc.saveAs(filePath);
         } catch (JauntException e) {
-            System.err.println(e);
-
+            System.err.println(e.getMessage());
         } finally {
-            this.pool = BrowserAgentPool.getPoolObject();
+            this.pool.returnObject(this.browserAgent); // Returning Browseragent to pool
         }
     }
 
