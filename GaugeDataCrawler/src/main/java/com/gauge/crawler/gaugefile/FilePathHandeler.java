@@ -35,10 +35,10 @@ public class FilePathHandeler {
     public void setBasePath() {
 //        System.out.println("Do You Want To Change Default OutPut Folder Path Enter [Y/N] ");
 //        String temp = this.sc.next();
-        String temp = "n"; //it is used for testing
+        String temp = "n"; //default value is used for testing
         if (temp.equalsIgnoreCase("y")) {
             System.out.println("Now Enter the OutPut Folder Path");
-            temp = this.sc.next() ;
+            temp = this.sc.next();
             this.filePath.basePath = temp + "/CrawlerOutPut";
         } else {
             this.filePath.basePath = System.getProperty("user.dir") + "/CrawlerOutPut";

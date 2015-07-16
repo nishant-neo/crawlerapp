@@ -51,7 +51,7 @@ public class DataConentFile implements Content {
         elements = null;
         xPathMethodCounter = 0;
         filePathHandeler = FilePathHandeler.getObject();
-        this.filePathHandeler.setBasePath();
+        this.filePathHandeler.setBasePath();// We have to add this method in crawling handeler
         this.xPathList.add("<textarea name=\"txtqrydsp\" >");// Xpath for testing 
     }
 
