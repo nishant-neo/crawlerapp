@@ -18,13 +18,8 @@ public class FilePathValidator implements Validator {
     @Override
     public boolean isValid(Object folderPath) { // This method will validate filepath
         File file = new File((String) folderPath);
-        if (file.exists()) {
-            // System.out.println(file + " This file is available");
-            return true;
-        } else {
-            // System.out.println(file + " This file is not available");
-            return false;
-        }
+        return file.exists(); // System.out.println(file + " This file is available");
+        // System.out.println(file + " This file is not available");
 
     }
 
