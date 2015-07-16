@@ -18,7 +18,7 @@ import java.io.IOException;
 public class UrlValidatorByRobotTxt implements Validator {
 
     @Override
-    public boolean isValid(Object field) {
+    public boolean isValid(Object field)throws Exception {
         String robots = "";
         RobotTxtDownloader obj = new RobotTxtDownloader();
         String link = (String) field;

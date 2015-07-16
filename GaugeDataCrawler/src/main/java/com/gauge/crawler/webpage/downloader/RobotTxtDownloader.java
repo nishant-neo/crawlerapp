@@ -24,6 +24,7 @@ public class RobotTxtDownloader implements Downloader {
     String tempPdfPath; // temp path of pdf
     
     public RobotTxtDownloader(){
+        pool = BrowserAgentPool.getPoolObject();
         map.put("judis", "1");
         map.put("dspace", "2");
         map.put("lobis", "3");
@@ -42,8 +43,11 @@ public class RobotTxtDownloader implements Downloader {
         
         try {
             browserAgent = (BrowserAgent) pool.borrowObject();
-            File path = new File("/Program-File/robots/" + map.get((String)domain) + ".txt");
-            browserAgent.download(url,path );
+            File path = new File("/home/gaugedata/NetBeansProjects/Gauge Analytics/gauge-data/GaugeDataCrawler/Program-File/" + map.get((String)domain) + ".txt");
+//            if (!path.exists()) {
+//            path.mkdirs();
+//        }
+            browserAgent.download(url+ "/robots.txt",path );
         } finally {
             pool.returnObject(browserAgent);// Returning BrowserAgent to pool
         }

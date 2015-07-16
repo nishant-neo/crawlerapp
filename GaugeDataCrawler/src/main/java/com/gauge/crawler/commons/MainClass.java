@@ -6,6 +6,7 @@
 package com.gauge.crawler.commons;
 
 import com.gauge.crawler.webpage.content.DataThread;
+import com.gauge.crawler.webpage.downloader.RobotTxtDownloader;
 
 /**
  *
@@ -16,8 +17,7 @@ public class MainClass {
     public static void main(String[] args) throws Exception {
         System.out.println("hiii im working...");
         Thread t1 = new Thread(new DataThread());
-
         t1.start();
-
+       
     }
 }
