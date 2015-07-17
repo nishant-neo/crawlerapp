@@ -199,15 +199,24 @@ public class QueryHandeler {
                         || Links[iterator].contains("http://www.mphc.in/?q=node/129&id=JBP"))
                 {
                     String court = Links[iterator].substring(Links[iterator].length()-3,Links[iterator].length() );//"GWL/IND/JBP";
-                    String judge = "";//from the website
-                    String requestMessage = "opt1=2&court=" + court + "&lst_case=&txtno=&txtyear=2015&lst_judge=" + judge + "&lst_pet=&txtparty=&lst_counsel=&txtcounsel=&date1=" + yearFrom + "-" + monthFrom + "-" + dayFrom + "&date2=" + yearPresent + "-" + monthPresent + "-" + dayPresent + "&submit=Submit";
-                    userAgent.sendPOST(Links[iterator], requestMessage);
-                    String data = userAgent.doc.innerXML();
-                    System.out.println("DOCUMENT:\n" + data);
-                    if( data.contains("No Jugdement or Order found that you want to search"))
-                        ;//error
-                    else
-                        ;//send the data
+                    userAgent.visit(Links[iterator]);
+                    //String data = userAgent.doc.innerXML();
+                    Element table = userAgent.doc.findFirst("<table class=\"newc\" cellspacing=\"1\" cellpadding=\"1\" border=\"0\" width=\"100%\" bgcolor=\"#F9F4FC\">");  //find table element
+                    Element table1 = table.findEach("<tr>");
+                    Element table2 = table1.findEach("<td>");
+                    Elements tds = table2.findEach("<option >"); 
+                    for(Element td: tds){
+                        String temp = td.outerHTML();
+                        //System.out.println(temp.substring(15,temp.indexOf(">",15)-1));
+                        String judge = temp.substring(15,temp.indexOf(">",15)-1);//from the website
+                        String requestMessage = "opt1=2&court=" + court + "&lst_case=&txtno=&txtyear=2015&lst_judge=" + judge + "&lst_pet=&txtparty=&lst_counsel=&txtcounsel=&date1=" + yearFrom + "-" + monthFrom + "-" + dayFrom + "&date2=" + yearPresent + "-" + monthPresent + "-" + dayPresent + "&submit=Submit";
+                        userAgent.sendPOST(Links[iterator], requestMessage);
+                        String data = userAgent.doc.innerXML();
+                        if( data.contains("No Jugdement or Order found that you want to search"))
+                            ;//error
+                        else
+                            System.out.println("DOCUMENT:\n" + data);//send the data
+                    }
                 } 
                 
                 
@@ -290,9 +299,21 @@ public class QueryHandeler {
                         //System.out.println("DOCUMENT:\n" + data);
                         if(data.contains("NO ROWS!!! TRY AGAIN!!")||data.contains("INVALID SESSION DATE!!! TRY AGAIN!!"))
                             ;//send error
-                        else
+                        else{
                             System.out.println("DOCUMENT:\n" + data);
+                            //data.substring(data.indexOf("Total No. of Rows: ")+18,data.indexOf("</p",data.indexOf("Total No. of Rows: ")));
+                            System.out.println(data.substring(data.indexOf("Total No. of Rows: ")+19 ,data.indexOf("</p",data.indexOf("Total No. of Rows: "))));
+                            int rows = Integer.parseInt(data.substring(data.indexOf("Total No. of Rows: ")+19,data.indexOf("</p",data.indexOf("Total No. of Rows: "))));
+                            int limitPage = rows/10;
+                            for( int i = 0; i<limitPage; i= i++)
+                            {
+                                System.out.println("FDFD");
+                                userAgent.visit("http://lobis.nic.in/dhc/juddt1.php?offset=" + String.valueOf(limitPage*10));
+                                data = userAgent.doc.innerXML();
+                                System.out.println(data);
+                            }
                             
+                        }
                     } 
                     
                 }
@@ -301,7 +322,7 @@ public class QueryHandeler {
                 //http://dspace.judis.nic.in/simple-search?query=justice&submit=Go
                 else if(Links[iterator].contains( "http://dspace.judis.nic.in")) {
                     userAgent.visit("http://dspace.judis.nic.in");
-                    String query =  "http://dspace.judis.nic.in/handle/123456789/31811/browse?type=datejudgement&sort_by=2&order=DESC&rpp=100&etal=-1&null=&offset=100000";
+                    String query =  "http://dspace.judis.nic.in/handle/123456789/31811/browse?type=datejudgement&sort_by=2&order=DESC&rpp=5000&etal=-1&null=&offset=100";
                     String query2 = "http://dspace.judis.nic.in/handle/123456789/44524/browse?type=datejudgement&sort_by=2&order=DESC&rpp=100&etal=-1&null=&offset=100";
                     String query3 = "http://dspace.judis.nic.in/handle/123456789/44683/browse?type=datejudgement&sort_by=2&order=DESC&rpp=100&etal=-1&null=&offset=100";
                     String dateFrom = dayFrom + "-" + monthFrom + "-" + yearFrom;
@@ -334,8 +355,8 @@ public class QueryHandeler {
                             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
                             Date date1 = sdf.parse(date);
                             Date date2 = sdf.parse(dateFrom);
-                            System.out.println(sdf.format(date1));
-                            System.out.println(sdf.format(date2));
+                            //System.out.println(sdf.format(date1));
+                            //System.out.println(sdf.format(date2));
                             if(date1.compareTo(date2)<0){
                                 break; 
                             }
@@ -344,7 +365,7 @@ public class QueryHandeler {
                             ex.printStackTrace();}
                         count++;
                     }
-                    //send data//http://dspace.judis.nic.in/handle/123456789/31811/browse?type=datejudgement&sort_by=2&order=DESC&rpp=100&etal=-1&null=&offset=count
+                    //send data//http://dspace.judis.nic.in/handle/123456789/31811/browse?type=datejudgement&sort_by=2&order=DESC&rpp=count&etal=-1&null=&offset=100
                 }
                 
                 
@@ -424,17 +445,18 @@ public class QueryHandeler {
                 //Karnataka
                 else if(Links[iterator].contains( "http://judgmenthck.kar.nic.in/"))
                 {
-                    System.out.println("fgf");
                     userAgent.visit("http://judgmenthck.kar.nic.in/");
-                    userAgent.visit("http://judgmenthck.kar.nic.in/judgments/browse?type=datecreated&order=DESC&rpp=100&submit_browse=Update");
+                    userAgent.visit("http://judgmenthck.kar.nic.in/judgments/browse?type=datecreated&order=DESC&rpp=4338&submit_browse=Update");
                     String data = userAgent.doc.innerXML();
                     Element table = userAgent.doc.findFirst("<table class=\"miscTable\">");  //find table element
-                    Elements table2 = table.findEvery("<td class=\"oddRowOddCol\"> | <td class=\"evenRowOddCol\">");
-                    //System.out.println(table2.outerHTML());
+                    Elements table2 = table.findEvery("<td class=\"oddRowOddCol\" | td class=\"evenRowOddCol\">");
+                    //table2 = table.findEvery("<td class=\"evenRowOddCol\">");
+                    //ERROR!!!!!!!!!!!!!!!!!!
+                    System.out.println(table2.outerHTML());
                     String dateFrom = dayFrom + "-" + monthFrom + "-" + yearFrom;
                     for(Element td: table2){
                         Element tds = td.findFirst("<a>");
-                        System.out.println(tds.outerHTML());
+                        //System.out.println(tds.outerHTML());
                         String date = tds.innerText();
                         if(date.length() < 10)
                             continue;//send error
