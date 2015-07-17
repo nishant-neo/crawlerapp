@@ -68,7 +68,7 @@ public class QueryHandeler {
                 
             
             for (int iterator = 0; iterator < Links.length; iterator++) {
-                UserAgent userAgent = new UserAgent();
+                 UserAgent userAgent = new UserAgent();
                 
                 
                 //Andhra Pradesh
@@ -77,13 +77,15 @@ public class QueryHandeler {
                 // Kerala
                 // Chennai
                 // Sri Nagar
-                if (Links[iterator] == "http://judis.nic.in/judis_andhra/judqry.aspx"
+                 // Judis websites uses .asp so getting the hidden variables and then sending them alowith the POST query
+                 //For pagination
+                if (Links[iterator].contains( "http://judis.nic.in/judis_andhra/judqry.aspx")
                         || Links[iterator] == "http://judis.nic.in/judis_chattisgarh/judqry.aspx"
                         || Links[iterator] == "http://judis.nic.in/Judis_Jammu/judqry.aspx"
                         || Links[iterator] == "http://judis.nic.in/judis_kerala/judqry.aspx"
                         || Links[iterator] == "http://judis.nic.in/judis_chennai/judqry.aspx"
                         || Links[iterator] == "http://judis.nic.in/Judis_SriNagar/judqry.aspx") {
-                    //UserAgent userAgent = new UserAgent();
+            
                     userAgent.visit("http://judis.nic.in/judis_andhra/judqry.aspx");
                     String page = userAgent.doc.innerXML();
                     //System.out.println("DOCUMENT:\n" + page);
@@ -94,16 +96,13 @@ public class QueryHandeler {
                     String data = userAgent.doc.innerXML();
                     //System.out.println("DOCUMENT:\n" + data);
                     userAgent.visit("http://judis.nic.in/judis_andhra/judseq.aspx");
-                    System.out.println(userAgent.doc.innerXML());
-                    System.out.println(userAgent.doc.innerXML());
+                    //System.out.println(userAgent.doc.innerXML());
                     if(data.contains("No Records Found"))
                         ;//error
                     else
                     {
                         //System.out.println("DOCUMENT:\n" + data);
-                        System.out.println("check");
                         var = variablesJudis(data);
-                        System.out.println("check");
                         while (true){
                             int index = 0;
                             int foundAt = -1;
@@ -135,16 +134,22 @@ public class QueryHandeler {
                         }
                     }
                    }
-
-                //Himanchal Pradesh   
+                 
+                
+                
+                //Himanchal Pradesh
+                //Just need to send the POST request in the format
+                //There is a selection between ORDER and JUDGEMENT. Uncomment the order part to include Orders as well
+                //Pagination not required. All records in same page
                  else if (Links[iterator] == "http://164.100.138.36/casest/order/date-query.php") {
+                    String requestMessage = "";
+                    String data = "";
                     //order
-                    
-                    String requestMessage = "date5=" + yearFrom + "-" + monthFrom + "-" + dayFrom + "&date5_dp=1&date5_year_start=2000&date5_year_end=2015&date5_da1=946665000&date5_da2=1451500200&date5_sna=1&date5_aut=&date5_frm=&date5_tar=&date5_inp=&date5_fmt=j+F+Y&date5_dis=&date5_pr1=&date5_pr2=&date5_prv=&date5_pth=calendar%2F&date5_spd=%5B%5B%5D%2C%5B%5D%2C%5B%5D%5D&date5_spt=0&date5_och=&date5_str=0&date5_rtl=&date5_wks=&date5_int=1&date5_hid=1&date5_hdt=1000&date6=" + yearPresent + "-" + monthPresent + "-" + dayPresent + "&date6_dp=1&date6_year_start=2000&date6_year_end=2015&date6_da1=946665000&date6_da2=1451500200&date6_sna=1&date6_aut=&date6_frm=&date6_tar=&date6_inp=&date6_fmt=j+F+Y&date6_dis=&date6_pr1=&date6_pr2=&date6_prv=&date6_pth=calendar%2F&date6_spd=%5B%5B%5D%2C%5B%5D%2C%5B%5D%5D&date6_spt=0&date6_och=&date6_str=0&date6_rtl=&date6_wks=&date6_int=1&date6_hid=1&date6_hdt=1000&order=O&bench=all";
+                    /*String requestMessage = "date5=" + yearFrom + "-" + monthFrom + "-" + dayFrom + "&date5_dp=1&date5_year_start=2000&date5_year_end=2015&date5_da1=946665000&date5_da2=1451500200&date5_sna=1&date5_aut=&date5_frm=&date5_tar=&date5_inp=&date5_fmt=j+F+Y&date5_dis=&date5_pr1=&date5_pr2=&date5_prv=&date5_pth=calendar%2F&date5_spd=%5B%5B%5D%2C%5B%5D%2C%5B%5D%5D&date5_spt=0&date5_och=&date5_str=0&date5_rtl=&date5_wks=&date5_int=1&date5_hid=1&date5_hdt=1000&date6=" + yearPresent + "-" + monthPresent + "-" + dayPresent + "&date6_dp=1&date6_year_start=2000&date6_year_end=2015&date6_da1=946665000&date6_da2=1451500200&date6_sna=1&date6_aut=&date6_frm=&date6_tar=&date6_inp=&date6_fmt=j+F+Y&date6_dis=&date6_pr1=&date6_pr2=&date6_prv=&date6_pth=calendar%2F&date6_spd=%5B%5B%5D%2C%5B%5D%2C%5B%5D%5D&date6_spt=0&date6_och=&date6_str=0&date6_rtl=&date6_wks=&date6_int=1&date6_hid=1&date6_hdt=1000&order=O&bench=all";
                     System.out.println(requestMessage);
                     userAgent.sendPOST("http://164.100.138.36/casest/order/date-order-judgment.php", requestMessage);
                     String data = userAgent.doc.innerXML();
-                    System.out.println("DOCUMENT:\n" + data);
+                    System.out.println("DOCUMENT:\n" + data);*/
                     
                     //judgement
                     requestMessage = "date5=" + yearFrom + "-" + monthFrom + "-" + dayFrom + "&date5_dp=1&date5_year_start=2000&date5_year_end=2015&date5_da1=946665000&date5_da2=1451500200&date5_sna=1&date5_aut=&date5_frm=&date5_tar=&date5_inp=&date5_fmt=j+F+Y&date5_dis=&date5_pr1=&date5_pr2=&date5_prv=&date5_pth=calendar%2F&date5_spd=%5B%5B%5D%2C%5B%5D%2C%5B%5D%5D&date5_spt=0&date5_och=&date5_str=0&date5_rtl=&date5_wks=&date5_int=1&date5_hid=1&date5_hdt=1000&date6=" + yearPresent + "-" + monthPresent + "-" + dayPresent + "&date6_dp=1&date6_year_start=2000&date6_year_end=2015&date6_da1=946665000&date6_da2=1451500200&date6_sna=1&date6_aut=&date6_frm=&date6_tar=&date6_inp=&date6_fmt=j+F+Y&date6_dis=&date6_pr1=&date6_pr2=&date6_prv=&date6_pth=calendar%2F&date6_spd=%5B%5B%5D%2C%5B%5D%2C%5B%5D%5D&date6_spt=0&date6_och=&date6_str=0&date6_rtl=&date6_wks=&date6_int=1&date6_hid=1&date6_hdt=1000&order=J&bench=all";
@@ -156,49 +161,47 @@ public class QueryHandeler {
 
 
                 //Jharkhand
-                else if (Links[iterator] == "http://jhr.nic.in/hcjudge/date_wise.php") {
-                    int pageNo = 1;
+                 //Simple POST request need to be sent in required format.
+                 //For pagination, retrieved no. of records and then calculated no. of pages by no. of records per page i.e. 10
+                else if (Links[iterator].contains("http://jhr.nic.in/hcjudge/date_wise.php")) {
+                    int pageNo = 1, records, limitPage, index;
+                    String data, Query;
                     // Query Format is Eg. http://jhr.nic.in/hcjudge/date_output.php?page=2&from=2014/1/1&to=2015/1/1
-                    String Query = "http://jhr.nic.in/hcjudge/date_output.php?page="+pageNo+"&from=" +yearFrom+"/"+monthFrom+"/"+dayFrom+"&to="+yearPresent+"/"+monthPresent+"/"+dayPresent;
+                    Query = "http://jhr.nic.in/hcjudge/date_output.php?page="+pageNo+"&from=" +yearFrom+"/"+monthFrom+"/"+dayFrom+"&to="+yearPresent+"/"+monthPresent+"/"+dayPresent;
                     userAgent.visit(Query);
-                    String data = userAgent.doc.innerXML();
+                    data = userAgent.doc.innerXML();
                     System.out.println("DOCUMENT:\n" + data);
                     if( data.contains("Record Not Found!"))
                         ;//error statemnt
                     else
                     {
-                        System.out.println("ASDFGHJKL");
-                         int index = data.indexOf("Total no. of records found :-");
-                         System.out.println(index);
-                         System.out.println(data.charAt(index+29));
-                         System.out.println(data.charAt(data.indexOf("<br",index+27)));
-                         int records = Integer.parseInt(data.substring(index+29, data.indexOf("<br",index+27)));
-                         System.out.println(records);
-                         int limitPage = (records %10 ==0)?records/10:(records/10)+1;
-                         System.out.println(limitPage);
-                         /*for( int i = 2; i <= limitPage; i++)
-                                 {
-                                     Query = "http://jhr.nic.in/hcjudge/date_output.php?page="+i+"&from=" +yearFrom+"/"+monthFrom+"/"+dayFrom+"&to="+yearPresent+"/"+monthPresent+"/"+dayPresent;
-                                     userAgent.visit(Query);
-                                     data = userAgent.doc.innerXML();
-                                     System.out.println("DOCUMENT:\n" + data);
-                                 
-                                 }*/
+                        
+                        index = data.indexOf("Total no. of records found :-");
+                        records = Integer.parseInt(data.substring(index+29, data.indexOf("<br",index+27)));
+                        limitPage = (records %10 ==0)?records/10:(records/10)+1;
+                         
+                        for( int i = 2; i <= limitPage; i++)
+                            {
+                                Query = "http://jhr.nic.in/hcjudge/date_output.php?page="+i+"&from=" +yearFrom+"/"+monthFrom+"/"+dayFrom+"&to="+yearPresent+"/"+monthPresent+"/"+dayPresent;
+                                userAgent.visit(Query);
+                                data = userAgent.doc.innerXML();
+                                System.out.println("DOCUMENT:\n" + data);
+                            }
                     }
                 } 
 
 
-                // Madhya Pradesh (Gwalior / Jabalpur / Indore)   
-                else if (Links[iterator] == "http://www.mphc.in/?q=node/129&id=GWL"
-                        || Links[iterator] == "http://www.mphc.in/?q=node/129&id=IND"
-                        || Links[iterator] == "http://www.mphc.in/?q=node/129&id=JBP")
-                 
-                 {
-                    String court = "";//"GWL/IND/JBP";
+                // Madhya Pradesh (Gwalior / Jabalpur / Indore) 
+                //Send the simple query with the court code and the Judges name
+                //No need for pagination
+                else if (Links[iterator].contains("http://www.mphc.in/?q=node/129&id=GWL")
+                        || Links[iterator].contains("http://www.mphc.in/?q=node/129&id=IND")
+                        || Links[iterator].contains("http://www.mphc.in/?q=node/129&id=JBP"))
+                {
+                    String court = Links[iterator].substring(Links[iterator].length()-3,Links[iterator].length() );//"GWL/IND/JBP";
                     String judge = "";//from the website
                     String requestMessage = "opt1=2&court=" + court + "&lst_case=&txtno=&txtyear=2015&lst_judge=" + judge + "&lst_pet=&txtparty=&lst_counsel=&txtcounsel=&date1=" + yearFrom + "-" + monthFrom + "-" + dayFrom + "&date2=" + yearPresent + "-" + monthPresent + "-" + dayPresent + "&submit=Submit";
-
-                    userAgent.sendPOST("http://www.mphc.in/?q=node/129&id=GWL", requestMessage);
+                    userAgent.sendPOST(Links[iterator], requestMessage);
                     String data = userAgent.doc.innerXML();
                     System.out.println("DOCUMENT:\n" + data);
                     if( data.contains("No Jugdement or Order found that you want to search"))
@@ -207,11 +210,17 @@ public class QueryHandeler {
                         ;//send the data
                 } 
                 
+                
+                
                 //Orissa
                 //Uttarakhand
-                else if (Links[iterator] == "http://lobis.nic.in/ori/juddt.php?scode=19"
-                        || Links[iterator] == "http://lobis.nic.in/uhc/juddt.php?scode=35") {
-                    System.out.println("FGFG");
+                //Simple POST query taking all the dates from last date to present date
+                //No pagination done
+                else if (Links[iterator].contains("http://lobis.nic.in/ori/juddt.php?scode=19")
+                        || Links[iterator].contains("http://lobis.nic.in/uhc/juddt.php?scode=35")
+                        ) {
+                    int day , month, year;
+                    String requestMessage, data;
                     DateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
                     Date startDate = null, endDate = null;
                     String date1 = dayFrom + "-" + monthFrom + "-" + yearFrom;
@@ -229,30 +238,28 @@ public class QueryHandeler {
                     end.setTime(endDate);
                     while(!start.after(end)) 
                     {
-                        int year = start.get(Calendar.YEAR);
-                        int month = start.get(Calendar.MONTH) + 1;
-                        int day = start.get(Calendar.DAY_OF_MONTH);
+                        year = start.get(Calendar.YEAR);
+                        month = start.get(Calendar.MONTH) + 1;
+                        day = start.get(Calendar.DAY_OF_MONTH);
                         System.out.printf("%d.%d.%d\n", day, month, year);        
                         start.add(Calendar.DATE, 1);
                     
-                    
-                        String requestMessage = "juddt=" + day + "%2F" + month + "%2F" + year + "&Submit=Submit";
-                        userAgent.sendPOST("http://www.mphc.in/?q=node/129&id=GWL", requestMessage);
-                        String data = userAgent.doc.innerXML();
-                        System.out.println("DOCUMENT:\n" + data);
-                        if(data.contains("No Judgments found! Please Try Again!!!"))
+                        //juddt=22%2F04%2F2012&Submit=Submit
+                        requestMessage = "juddt=" + day + "%2F" + month + "%2F" + year + "&Submit=Submit";userAgent.sendPOST(Links[iterator].substring(0,Links[iterator].length()-13) + "1.php?dc=19&fflag=1", requestMessage);
+                        data = userAgent.doc.innerXML();if(data.contains("No Judgments found! Please Try Again!!!"))
                             ;//send error
                         else
-                            ;
+                           System.out.println("DOCUMENT:\n" + data) ;
                             
                     } 
                 }
                 
-               // System.out.println("cvvb");
-                //delhi
+                //Delhi
+                //Simple POST method with all the variables
+                //Pagination needs to be done
                 else if(Links[iterator].contains("http://lobis.nic.in/dhc/juddt.php?scode=31") )
                 {
-                    System.out.println("FDFDF");
+                    int year, month ,day;
                     DateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
                     Date startDate = null, endDate = null;
                     String date1 = dayFrom + "-" + monthFrom + "-" + yearFrom;
@@ -270,14 +277,14 @@ public class QueryHandeler {
                     end.setTime(endDate);
                     while(!start.after(end)) 
                     {
-                        int year = start.get(Calendar.YEAR);
-                        int month = start.get(Calendar.MONTH) + 1;
-                        int day = start.get(Calendar.DAY_OF_MONTH);
+                        year = start.get(Calendar.YEAR);
+                        month = start.get(Calendar.MONTH) + 1;
+                        day = start.get(Calendar.DAY_OF_MONTH);
                         System.out.printf("%d.%d.%d\n", day, month, year);        
                         start.add(Calendar.DATE, 1);
-                    
-                    
-                        String requestMessage = "juddt=" + day + "%2F" + month + "%2F" + year + "&Submit=Submit";
+                        //jday=01&jmonth=02&jyear=2015&Submit=Submit
+                        String requestMessage = "jday=" + day + "&jmonth=" + month + "&jyear=" + year + "&Submit=Submit";
+                        System.out.println(requestMessage);
                         userAgent.sendPOST("http://lobis.nic.in//dhc/juddt1.php?dc=31&%20fflag=1", requestMessage);
                         String data = userAgent.doc.innerXML();
                         //System.out.println("DOCUMENT:\n" + data);
@@ -293,7 +300,7 @@ public class QueryHandeler {
 
                 //http://dspace.judis.nic.in/simple-search?query=justice&submit=Go
                 else if(Links[iterator].contains( "http://dspace.judis.nic.in")) {
-                     userAgent.visit("http://dspace.judis.nic.in");
+                    userAgent.visit("http://dspace.judis.nic.in");
                     String query =  "http://dspace.judis.nic.in/handle/123456789/31811/browse?type=datejudgement&sort_by=2&order=DESC&rpp=100&etal=-1&null=&offset=100000";
                     String query2 = "http://dspace.judis.nic.in/handle/123456789/44524/browse?type=datejudgement&sort_by=2&order=DESC&rpp=100&etal=-1&null=&offset=100";
                     String query3 = "http://dspace.judis.nic.in/handle/123456789/44683/browse?type=datejudgement&sort_by=2&order=DESC&rpp=100&etal=-1&null=&offset=100";
@@ -301,7 +308,7 @@ public class QueryHandeler {
                     userAgent.visit(query);
                     String data = userAgent.doc.innerXML();
                     Element table = userAgent.doc.findFirst("<table align=\"center\" class=\"miscTable\" summary=\"This table browses all dspace content\">");  //find table element
-                    Element table2 = table.findEach("<tr class=\"evenRowEvenCol\">");
+                    Element table2 = table.findEach("<tr class=\"evenRowEvenCol\">| <tr class=\"oddRowEvenCol\">");
                     Elements tds = table2.findEach("<td headers=\"t1\">"); 
                     Dictionary dict = new Hashtable();
                     dict.put("Jan", "01");
@@ -373,11 +380,11 @@ public class QueryHandeler {
                         String query = "http://courtnic.nic.in//jodh/dojqry.asp?datef="+year+"-"+month+"-"+day+"&selfday="+day+"&selfmonth="+month+"&selfyear="+year+"&B1=Search";
                         userAgent.visit(query);
                         String data = userAgent.doc.innerXML();
-                        System.out.println("DOCUMENT:\n" + data);
+                        
                         if(data.contains("No records found!"))
                             ;//send error
                         else
-                            ;//
+                            System.out.println("DOCUMENT:\n" + data);//
                             
                     }
                    
@@ -409,6 +416,50 @@ public class QueryHandeler {
                             System.out.println("DOCUMENT:\n" + data);
                         }
                     }
+                }
+                
+                
+
+
+                //Karnataka
+                else if(Links[iterator].contains( "http://judgmenthck.kar.nic.in/"))
+                {
+                    System.out.println("fgf");
+                    userAgent.visit("http://judgmenthck.kar.nic.in/");
+                    userAgent.visit("http://judgmenthck.kar.nic.in/judgments/browse?type=datecreated&order=DESC&rpp=100&submit_browse=Update");
+                    String data = userAgent.doc.innerXML();
+                    Element table = userAgent.doc.findFirst("<table class=\"miscTable\">");  //find table element
+                    Elements table2 = table.findEvery("<td class=\"oddRowOddCol\"> | <td class=\"evenRowOddCol\">");
+                    //System.out.println(table2.outerHTML());
+                    String dateFrom = dayFrom + "-" + monthFrom + "-" + yearFrom;
+                    for(Element td: table2){
+                        Element tds = td.findFirst("<a>");
+                        System.out.println(tds.outerHTML());
+                        String date = tds.innerText();
+                        if(date.length() < 10)
+                            continue;//send error
+                        String datec = date.substring(8,10) + "-" + date.substring(5,7) + "-" + date.substring(0,4);
+                        try{
+ 
+                            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                            Date date1 = sdf.parse(datec);
+                            Date date2 = sdf.parse(dateFrom);
+                            
+                            //System.out.println(sdf.format(date1));
+                            //System.out.println(sdf.format(date2));
+                            if(date1.compareTo(date2)<0){
+                                break;} 
+                            String temp = tds.outerHTML();
+                            userAgent.visit(temp.substring(9,temp.indexOf("\"", 10)));
+                            data = userAgent.doc.innerXML();//SEND this data
+                        }
+                        
+                        catch(ParseException ex){
+                            ex.printStackTrace();}
+                        
+                        
+                    }
+                    
                 }
             
         }
